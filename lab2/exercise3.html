@@ -8,5 +8,39 @@
 </head>
 
   <body>
-    
+    <h1> id="heading">Exercise 3</h1>
+    <p id="first">This is my first paragraph.</p>
+    <p class="text">This is my second paragraph.</p>
+    <p class="text">This is my third paragraph.</p>
+
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>jQuery</li>
+    </ul>
+
+    <button id="changeText">Change Heading</button>
+    <button id="changeColor">Change Paragraph Color</button>
+    <button id="hideList">Hide List</button>
+    <button id="showList">Show List</button>
+
+    <script>
+        $(document).ready(function() {
+            $("#changeText").click(function() {
+                $("#heading").text("The Heading is Now Changed!");
+            });
+            $("#changeColor").click(function() {
+                $(".text").css("color", "pink");
+            });
+            $("#hideListt").click(function() {
+                $("ul").hide();
+            });
+            $("#showList").click(function() {
+                $("ul").show();
+            });
+        });
+    </script>
+
+    <p><a href="../index.html">Back to Home</a></p>
   </body>
+</html>
