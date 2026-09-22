@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 2 - Exercise 4</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+  <h1>Exercise 4: Website Progress</h1>
+  <p>This table will show some of the changes I have made to the my website per course guidance.</p>
+
+  <table border="1">
+    <tr>
+      <th>Website Changes</th>
+      <th>Lab</th>
+    </tr>
+    <tr>
+      <td>Created the Homepage</td>
+      <td>Lab 1</td>
+    </tr>
+    <tr>
+      <td>Added Navigation</td>
+      <td>Lab 1</td>
+    </tr>
+    <tr>
+      <td>Added a Section for Lab 2</td>
+      <td>Lab 2</td>
+    </tr>
+    <tr>
+      <td>Added jQuery DOM and CSS Examples</td>
+      <td>Lab 2</td>
+    </tr>
+  </table>
+  <br>
+  <button id="hideOdd">Hide the Odd Rows</button>
+  <button id="showRows">Restore All Rows</button>
+
+  <script>
+    $(document).ready(function() {
+      $("tr:odd").css("background-color", "lightblue");
+      $("#hideOdd").click(function() {
+        $("tr:odd").hide();
+      });
+      $("#showRows").click(function() {
+        $("tr").show();
+      });
+      $("tr").click(function() {
+        $(this).hide();
+      });
+  </script>
+
+  <p><a href="../index.html">Back to Home</a></p>
+</body>
+</html>
