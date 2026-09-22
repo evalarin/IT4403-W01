@@ -23,6 +23,7 @@
     <button id="changeColor">Change Paragraph Color</button>
     <button id="hideList">Hide List</button>
     <button id="showList">Show List</button>
+    <button id="changeStyle">Change Style</button>
 
     <script>
         $(document).ready(function() {
@@ -32,11 +33,16 @@
             $("#changeColor").click(function() {
                 $(".text").css("color", "pink");
             });
-            $("#hideListt").click(function() {
+            $("#hideList").click(function() {
                 $("ul").hide();
             });
             $("#showList").click(function() {
                 $("ul").show();
+            });
+            $("#changeStyle").click(function() {
+                $("#first").css("background-color", "lightblue");
+                $("#first").css("font-size", "30px");
+                $("#first").css("border", "2px solid purple");
             });
         });
     </script>
