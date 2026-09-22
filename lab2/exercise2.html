@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 2 - Exercise 2</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+  <h1>Exercise 2: jQuery Event Handling</h1>
+  <p id="p1">This is my first paragraph.</p>
+  <p id="p2">This is my second paragraph.</p>
+
+  <button id="button1">Hide First Paragraph</button>
+  <button id="button2">Hide Second Paragraph</button>
+
+  <script>
+    $(document).ready(function() {
+      $("#button1").click(function() {
+        $("#p1").hide();
+      });
+      $("#button2").click(function() {
+        $("#p2").hide();
+      });
+    });
+  </script>
+
+  <p><a href="../index.html">Back to Home</a></p>
+</body>
