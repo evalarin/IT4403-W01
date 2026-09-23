@@ -8,5 +8,30 @@
 </head>
 <body>
   <h1>Exercise 7: Picture Browser</h1>
-  <img
+  <img id="picture" src="images/image1.jpeg" width="400" alt="Picture">
+<p id="counter">Picture 1 of 4</p>
+<button id="next">Next Picture</button>
+<script>
+    $(document).ready(function() {
+        var pictures = [
+            "images/image1.jpeg",
+            "images/image2.jpeg",
+            "images/image3.jpeg",
+            "images/image4.jpeg"
+        ];
+        var current = 0;
+        $("#next").click(function() {
+            current = current + 1;
+            if (current == pictures.length) {
+                current = 0;
+            }
+            $("#picture").attr("src", pictures[current]);
+            $("#picture").fadeIn();
+        });
+        $("#counter").text("Picture " + (current +1) + " of 4");
+    });
+    });
+</script>
+    <p><a href="../index.html">Back to Home</a></p>
 </body>
+</html>
