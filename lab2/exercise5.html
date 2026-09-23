@@ -10,4 +10,32 @@
 <body>
   <h1>Exercise 5: jQuery Visual Effects</h1>
   <p id="effectText">This paragraph will be used to demonstrate different jQuery effects.</p>
-  
+
+    <button id="hide">Hide</button>
+    <button id="show">Show</button>
+    <button id="toggle">Toggle</button>
+    <button id="fade">Fade</button>
+    <button id="slide">Slide</button>
+
+    <script>
+        $(document).ready(function() {
+            $("#hide").click(function() {
+                $("#effectText").hide();
+            });
+            $("#show").click(function() {
+                $("#effectText").show();
+            });
+            $("#toggle").click(function() {
+                $("#effectText").fadeToggle();
+            });
+            $("#fade").click(function() {
+                $("#effectText").fadeToggle();
+            });
+            $("#slide").click(function() {
+                #("#effectText").slideToggle();
+            });
+        });
+    </script>
+    <p><a href="../index.html">Back to Home</a></p>
+</body>
+</html>
