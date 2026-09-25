@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 3 - Exercise 3</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <h1>Exercise 3: Reading JSON Values</h1>
+  <h2>First Book</h2>
+  <p id="firstTitle"></p>
+  <p id="firstAuthor"></p>
+  <p id="firstPrice"></p>
+  <h2>All Books</h2>
+  <ul id="bookList"></ul>
+  <p id="totalBooks"></p>
+  <script>
+    $(document).ready(function() {
+      var data = {
+        "books": [
+          {
+            "title": "Web Development Basics",
+            "author": "Maya Lee",
+            "price": 29.99
+          },
+          {
+            "title": "Modern JavaScript",
+            "author": "Daniel Kim",
+            "price": 34.50
+          },
+          {
+            "title": "Understanind JSON",
+            "author": "Sofia Patel",
+            "price": 24.95
+          }
+        ]
+      };
+
+      $("#firstTitle").text("Title: " + data.books[0].title);
+      $("#firstAtuhor").text("Author: " + data.books[0].author);
+      $("#firstPrice").text("Price: $" + data.books[0].price);
+
+      for (var i=0,i < data.books.length; i++) {
+        $("#bookList").append(
+          "<li>" + data.books[i].title + " by " +
+          data.books[i].author + "</li>"
+        );
+      }
+      $("#totalBooks").text("Total Books: " + data.books.length);
+    });
+          
+  </script>
+
+  <p><a href="../index.html">Back to Home</a></p>
+</body>
+</html>
