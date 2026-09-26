@@ -41,10 +41,9 @@
       $("#firstAtuhor").text("Author: " + data.books[0].author);
       $("#firstPrice").text("Price: $" + data.books[0].price);
 
-      for (var i=0,i < data.books.length; i++) {
+      for (var i=0; i < data.books.length; i++) {
         $("#bookList").append(
-          "<li>" + data.books[i].title + " by " +
-          data.books[i].author + "</li>"
+          "<li>" + data.books[i].title + " by " + data.books[i].author + "</li>"
         );
       }
       $("#totalBooks").text("Total Books: " + data.books.length);
