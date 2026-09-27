@@ -12,6 +12,7 @@
   <p id="firstTitle"></p>
   <p id="firstAuthor"></p>
   <p id="firstPrice"></p>
+    
   <h2>All Books</h2>
   <ul id="bookList"></ul>
   <p id="totalBooks"></p>
@@ -38,7 +39,7 @@
       };
 
       $("#firstTitle").text("Title: " + data.books[0].title);
-      $("#firstAtuhor").text("Author: " + data.books[0].author);
+      $("#firstAuthor").text("Author: " + data.books[0].author);
       $("#firstPrice").text("Price: $" + data.books[0].price);
 
       for (var i=0; i < data.books.length; i++) {
