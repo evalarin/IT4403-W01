@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 3 - Exercise 6</title>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+  <h1>Exercise 6: Movie Information JSON</h1>
+  <h2 id="title"></h2>
+
+  <p id="year"></p>
+  <p id="rating"></p>
+  <p id="genres"></p>
+  <p id="score"></p>
+
+  <h3>Synopsis</h3>
+  <p id="synopsis"></p>
+
+  <h3>Cast</h3>
+  <ul id="cast"></ul>
+
+  <script>
+    $(document).ready(function() {
+      $.getJSON("movie.json", function(data) {
+        $("#title").text(data.title);
+        $("#year").text("Year: " + data.year);
+        $("#rating").text("MPAA Rating: " + data.mpaa_rating);
+        $("#genres").text("Genres: " + data.genres.join(", "));
+        $("#scores").text("Audience Score: " + data.ratings.audience_score + "%");
+        $("#synopsis").text(data.synopsis);
+        for (var i = 0; i < data.abridged_cast.length; i++) {
+          $("#cast").append(
+            "<li>" + data.abridged_cast[i].name + "</li>"
+          );
+        }
+      });
+    });
+  </script>
+  <p><a href="../index.html">Back to Home</a></p>
+</body>
+</html>
