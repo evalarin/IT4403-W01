@@ -8,16 +8,59 @@
 </head>
 
 <body>
-  <h1>Exercise 4: Nested JSON Data</h1>
-  <h2>Student Information</h2>
+    <h1>Exercise 4: Nested JSON Data</h1>
+    <h2>Student Information</h2>
 
-  <p id="name"></p>
-  <p id="major"></p>
-  <p id="email"></p>
+    <p id="name"></p>
+    <p id="major"></p>
+    <p id="email"></p>
 
-  <h2>Courses</h2>
+    <h2>Courses</h2>
 
-  <ul id="courses"></ul>
+    <ul id="courses"></ul>
+
+    <script>
+        $(document).ready(function() {
+            var student = {
+                "name": "Elena",
+                "major": "Information Technology",
+                "email": "evalarin@students.kennesaw.edu",
+                "courses": [
+                    {
+                        "code": "IT 4403",
+                        "title": "Advanced Web and Mobile Applicaitons",
+                        "credits": 3
+                    },
+                    {
+                        "code": "IT 4983",
+                        "title": "IT Capstone Project",
+                        "credits": 3
+                    },
+                    {
+                        "code": "IT 4423",
+                        "title": "Linux/Unix Administration".
+                        "credits": 3
+                    }
+                ]
+            };
+
+            $("#name").text("Name: " + student.name);
+            $("#major").text("Major: " + student.major);
+            $("#email").text("Email: " + student.email);
+
+            for (var i=0; i < student.courses.length; i++) {
+                $("#courses").append(
+                    "<li>" +
+                    student.courses[i].code + " - " +
+                    student.courses[i].title + " - " +
+                    student.courses[i].credits + " credit hours " +
+                    "</li>"
+                );
+            }
+        });
+    </script>
+
+    <p><a href="../index.html">Back to Home</a></p>
   
 </body>
 </html>
