@@ -20,8 +20,8 @@
 
   <script>
     $(document).ready(function() {
-      $.getJSON("weather.josn", function(data) {
-        $("#location").text("location: " + data.name);
+      $.getJSON("weather.json", function(data) {
+        $("#location").text("Location: " + data.name);
         $("#temp").text("Temperature: " + data.main.temp);
         $("#condition").text("Condition: " + data.weather[0].description);
         $("#humidity").text("Humidity: " + data.main.humidity + "%");
