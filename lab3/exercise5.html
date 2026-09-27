@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 3 - Exercise 5</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+  <h1>Exercise 5: Weather JSON</h1>
+
+  <h2>Weather Information</h2>
+
+  <p id="location"></p>
+  <p id="temp"></p>
+  <p id="condition"></p>
+  <p id="humidity"></p>
+  <p id="wind"></p>
+
+  <script>
+    $(document).ready(function() {
+      $.getJSON("weather.josn", function(data) {
+        $("#location").text("location: " + data.name);
+        $("#temp").text("Temperature: " + data.main.temp);
+        $("#condition").text("Condition: " + data.weather[0].description);
+        $("#humidity").text("Humidity: " + data.main.humidity + "%");
+        $("#wind").text("Wind: " + data.wind.speed);
+      });
+    });
+        
+  </script>
+  <p><a href="../index.html">Back to Home</a></p>
+  
+</body>
+</html>
 
