@@ -38,6 +38,7 @@
     }
     .book-info{
       flex:1;
+      width:100%;
     }
     .book-info h2{
       color:#003366;
@@ -86,7 +87,7 @@
             <img src="${cover}" alt="${book.title} Cover">
           </div>
           
-          <div class="book info">
+          <div class="book-info">
             <h2>${book.title}</h2>
             <p><strong>Publisher:</strong> ${book.publishers ? book.publishers.join(", ") : "Not Available"}</p>
             <p><strong>Publication Date:</strong> ${book.publish_date || "Not Available"}</p>
@@ -99,7 +100,7 @@
             </p>
             
             <p><strong>Author Reference:</strong>
-            <a href="https"//openlibrary.org${book.authors[0].key}" target="_blank">
+            <a href="https://openlibrary.org${book.authors[0].key}" target="_blank">
             ${book.authors[0].key}
             </a>
             </p>
