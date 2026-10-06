@@ -68,9 +68,15 @@
 
   $(document).ready(function () {
     $.getJSON("openlibrary-book.json", function (book) {
-      console.log(book);
+      $("#bookContainer").html(`
+        <div class="book">
+          <div class="book info">
+            <h2>${book.title}</h2>
+          </div>
+        </div>
+      `);
     }).fail(function () {
-      console.log("JSON failed to load.");
+      $("#bookContainer").html("<p>Unable to load the JSON file.</p>");
     });
   });
 </script>
