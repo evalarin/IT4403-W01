@@ -68,8 +68,20 @@
 
   $(document).ready(function () {
     $.getJSON("openlibrary-book.json", function (book) {
+      let cover = "";
+      if (book.covers && book.covers.length > 0 && book.covers[0] !== -1) {
+        cover = `https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`;
+      }
+      else{
+        cover = "https://placehold.co/250x350?text=No+Cover";
+      }
+      
       $("#bookContainer").html(`
         <div class="book">
+          <div class="book-cover">
+            <img src="${cover}" alt="${book.title} Cover">
+          </div>
+          
           <div class="book info">
             <h2>${book.title}</h2>
           </div>
