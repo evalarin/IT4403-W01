@@ -84,6 +84,28 @@
           
           <div class="book info">
             <h2>${book.title}</h2>
+            <p><strong>Publisher:</strong> ${book.publishers ? book.publishers.join(", ") : "Not Available"}</p>
+            <p><strong>Publication Date:</strong> ${book.publish_date || "Not Available"}</p>
+            <p><strong>Pages:</strong> ${book.number_of_pages || "Not Available"}</p>
+            <p><strong>ISBN-10:</strong> ${book.isbn_10 ? book.isbn_10.join(", ") : "Not Available"}</p>
+            <p><strong>ISBN-13:</strong> ${book.isbn_13 ? book.isbn_13.join(", ") : "Not Available"}</p>
+
+            <p><strong>First Sentence:</strong>
+            ${book.first_sentence ? book.first_sentence.value : "Not Available"}
+            </p>
+            
+            <p><strong>Author Reference:</strong>
+            ${book.authors ? book.authors[0].key : "Not Available"}
+            </p>
+
+            <p>
+            <strong>Open Library Record:</strong><br>
+
+            <a href="https://openlibrary.org${book.key}"
+            target="_blank">
+            View Record
+            </a>
+            </p>
           </div>
         </div>
       `);
