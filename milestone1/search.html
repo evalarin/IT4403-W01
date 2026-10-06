@@ -1,1 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Milestone 1 - Book Search Results</title>
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <style>
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background:#f5f7fb;
+      margin:40px;
+      color:#333;
+    }
+    .container{
+      max-width:900px;
+      margin:auto;
+    }
+    h1{
+      text-align:center;
+      color:#003366;
+    }
+    .book{
+      display:flex;
+      align-items:flex-start;
+      gap:30px;
+      background:white;
+      padding:30px;
+      border-radius:12px;
+      box-shadow:0 2px 10px rgba(0,0,0,.15);
+      margin-top:30px;
+    }
+    .book-cover img{
+      width:250px;
+      border-radius:8px;
+    }
+    .book-info{
+      flex:1;
+      width:100%;
+    }
+    .book-info h2{
+      color:#003366;
+      margin-top:0;
+    }
+    .book-info p{
+      margin:12px 0;
+      line-height:1.5;
+    }
+    .book-info strong{
+      color:#003366;
+    }
+    a{
+      color:#0056b3;
+      text-decoration:none;
+    }
+    a:hover{
+      text-decoration:underline;
+    }
+  
+  </style>
+</head>
+
+<body>
+<div class="container">
+
+  <h1>Open Library - Search Results</h1>
+  <div id="searchContainer">
+
+  </div>
+<script>
+
+  $(document).ready(function () {
+    $.getJSON("openlibrary-search.json", function (data) {
+      let html = "";
+      $.each(data.docs, function(index, book){
+
+        let cover = "";
+        if(book.cover_i){
+          cover = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
+        }
+        else{
+          cover = "https://placehold.co/180x250?text=No+Cover";
+        }
+
+        html += `
+          <div class="book">
+            <div class="book-cover">
+              <img src="${cover}" alt="${book.title} Cover">
+            </div>
+
+            <div class="book-info">
+              <h2>${book.title}</h2>
+              <p><strong>Author(s):</strong>
+              ${book.author_name ? book.author_name.join(", ") : "Not Available"}</p>
+              <p><strong>First Published:</strong>
+              ${book.first_publish_year || "Not Available"}</p>
+              <p><strong>Publisher:</strong>
+              ${book.publisher ? book.publisher.join(", ") : "Not Available"}</p>
+              <p><strong>Edition Count:</strong>
+              ${book.edition_count || "Not Available"}</p>
+              <p><strong>ISBN:</strong>
+              ${book.isbn ? book.isbn[0] : "Not Available"}</p>
+
+              <p><a href="https://openlibrary.org${book.key}" target="_blank">
+              View on Open Library
+              </a></p>
+            </div>
+          </div>
+        `;
+      });
+
+      $("#searchContainer").html(html);
+    }).fail(function () {
+      $("#searchContainer").html("<p>Unable to load JSON.</p>");
+  });
+  });
+</script>
+</body>
+</html>
