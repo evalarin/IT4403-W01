@@ -107,16 +107,17 @@
 
             <div class="book-info">
               <h2>${book.title}</h2>
+              
+               ${book.subtitle ? `
+              <p><strong>Subtitle:</strong> ${book.subtitle}</p>
+              ` : ""}
+              
               <p><strong>Author(s):</strong>
               ${book.author_name ? book.author_name.join(", ") : "Not Available"}</p>
               <p><strong>First Published:</strong>
               ${book.first_publish_year || "Not Available"}</p>
-              <p><strong>Publisher:</strong>
-              ${book.publisher ? book.publisher.join(", ") : "Not Available"}</p>
               <p><strong>Edition Count:</strong>
               ${book.edition_count || "Not Available"}</p>
-              <p><strong>ISBN:</strong>
-              ${book.isbn ? book.isbn[0] : "Not Available"}</p>
 
               <p><a href="https://openlibrary.org${book.key}" target="_blank">
               View on Open Library
