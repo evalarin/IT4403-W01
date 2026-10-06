@@ -7,6 +7,53 @@
   </head>
 
   <style>
+    header{
+      margin:-40px -40px 40px -40px;
+      background:#0897b3;
+    }
+    .header-top{
+      display:flex;
+      align-items:center;
+    }
+    .header-left{
+      width:300px;
+    }
+    .header-left img{
+      width:100%;
+      display:block;
+    }
+    .header-right{
+      color:white;
+      padding-left:40px;
+    }
+    .header-right h2{
+      margin:0;
+      font-size:28px;
+    }
+    .header-right h1{
+      margin:5px 0;
+      color:#ffe98d;
+      font-size:48px;
+    }
+    .header-right p{
+      margin:0;
+      font-size:22px;
+    }
+    nav{
+      text-align:center;
+      padding:25px 0;
+      border-top:2px solid #ffe98d;
+    }
+    nav a{
+      color:white;
+      text-decoration:none;
+      font-size:22px;
+      font-weight:bold;
+      margin:0 18px;
+    }
+    nav a:hover{
+      color:#ffe98d;
+    }
     footer{
       margin-top:60px;
       width:100%;
@@ -51,16 +98,24 @@
     }
   </style>
   <body>
+    
     <header>
-      <h1>Elena Valarino</h1>
-      <p>Kennesaw State University</p>
-      <nav>
-        <a href="#home">Home</a>
-        <a href="exercises">Exercises</a>
-        <a href="#labs">Labs</a>
-        <a href="#projects">Projects</a>
-      </nav>
-    </header>
+    <div class="header-top">
+        <div class="header-right">
+            <h2>Elena Valarino</h2>
+            <h1>IT 4403</h1>
+            <p>Kennesaw State University</p>
+        </div>
+    </div>
+
+    <nav>
+        <a href="../index.html">HOME</a>
+        <a href="../index.html#exercises">EXERCISES</a>
+        <a href="../index.html#labs">LABS</a>
+        <a href="../index.html#projects">PROJECTS</a>
+    </nav>
+</header>
+    
     <hr>
     <main id="home">
       <h2>Welcome to my IT4403 Website</h2>
