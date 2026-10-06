@@ -65,7 +65,14 @@
 
   </div>
 <script>
-  
+
+  $(document).ready(function () {
+    $.getJSON("openlibrary-book.json", function (book) {
+      console.log(book);
+    }).fail(function () {
+      console.log("JSON failed to load.");
+    });
+  });
 </script>
 </body>
 </html>
