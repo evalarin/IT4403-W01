@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5 - Open Library API</title>
+</head>
+<body>
+    <h1>Open Library: Data Analysis Books</h1>
+
+    <div id="results"></div>
+  
+  <script>
+    fetch("https://openlibrary.org/search.json?q=data%20analysis&limit=10")
+        .then(response => response.json())
+        .then(data => {
+            let bookList = "<ul>";
+
+            bookList += `
+              <li>
+                <strong>${book.title}</strong> - ${year}
+              </li>
+            `;
+        });
+        bookList += "</ul>";
+
+        document.getElementById("results").innerHTML = bookList;
+    })
+    .catch(error => {
+      console.log("Error:", error);
+    });
+  </script>
+</body>
+</html>
