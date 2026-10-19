@@ -32,5 +32,27 @@
       .catch(error => {
         console.log("Error:", error);
       });
+
+    fetch("https://jsonplaceholder.typicode.com/albums?userId=1")
+      .then(response => response.json())
+      .then(albums => {
+        let albumList = "<ul>";
+
+        albums.forEach(album => {
+          albumList += `
+            <li>
+              <a href="page2.html?albumId=${album.id}">
+                ${album.title}
+              </a>
+            </li>
+          `;
+        });
+
+        albumList += "</ul>";
+        document.getElementById("albumList").innerHTML = albumList;
+      })
+      .catch(error => {
+        console.log("Error:", error);
+      });
   </script>
 </html>
