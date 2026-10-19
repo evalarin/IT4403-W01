@@ -16,6 +16,9 @@
         .then(data => {
             let bookList = "<ul>";
 
+            data.docs.forEach(book => {
+                let year = book.first_publish_year || "Year unavailable";
+                
             bookList += `
               <li>
                 <strong>${book.title}</strong> - ${year}
