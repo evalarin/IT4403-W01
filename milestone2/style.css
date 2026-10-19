@@ -1,0 +1,104 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fb;
+  margin: 0;
+  color: #333;
+}
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+h1 {
+  text-align: center;
+  color: #003366;
+}
+nav {
+  background: #0897b3;
+  padding: 20px;
+  text-align: center;
+}
+nav a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0 20px;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+.book {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.15);
+  margin-top: 30px;
+}
+.book-cover img {
+  width: 180px;
+  border-radius: 8px;
+}
+.book-info {
+  flex: 1;
+}
+.book-info h2 {
+  color: #003366;
+  margin-top: 0;
+}
+.book-info strong {
+  color: #003366;
+}
+a {
+  color: #0056b3;
+  text-decoration: none;
+}
+a:hover {
+  color: #0056b3;
+  text-decoration: none;
+}
+footer {
+  margin-top: 60px;
+}
+.footer-top {
+  background: #0897b3;
+  color: white;
+  text-align: center;
+  padding: 45px 20px;
+}
+.footer-top h2 {
+  color: white;
+  font-size: 30px;
+}
+.footer-top p {
+  max-width: 650px;
+  margin: auto;
+  line-height: 1.6;
+}
+.footer-bottom {
+  background: #d49ce6;
+  text-align: center;
+  padding: 25px;
+}
+.email-pill {
+  display: inline-block;
+  background: #f8e58f;
+  color: #333;
+  padding: 8px 22px;
+  border-radius: 25px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+.footer-bottom a {
+  color: white;
+}
+@media (max-width: 600px) {
+  .book {
+    flex-direction: column;
+  }
+  .book-cover img (
+    width: 150px;
+  }
+}
