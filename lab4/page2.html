@@ -39,10 +39,10 @@
         let photoList = "";
 
         photos.forEach(photo => {
-          photoLost += `
+          photoList += `
             <div>
               <p>${photo.title}</p>
-              <img src="${photo.thumbnailUrl}" alt="$photo.title}">
+              <img src="${photo.thumbnailUrl}" alt="${photo.title}">
             </div>
           `;
         });
