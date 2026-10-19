@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4 - Album Photos</title>
+</head>
+<body>
+    <h1>Lab 4: Album Photos</h1>
+
+    <a href="page1.html">Back to User Albums</a>
+
+    <h2>Album Information</h2>
+    <div id="albumInfo"></div>
+
+    <h2>Album Photos</h2>
+    <div id="photoList"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const albumId = params.get("albumId");
+
+    fetch(`https://jsonplaceholder.typicode.com/albums/${albumId}`)
+      .then(response => response.json())
+      .then(album => {
+        document.getElementById("albumInfo").innerHTML = `
+          <p><strong>Album Title:</strong> ${album.title}</p>
+          <p><strong>Album ID:</strong> ${album.id}</p>
+          <p><strong>User ID:</strong> ${album.userId}</p>
+        `;
+      })
+      .catch(error => {
+        console.log("Error:", error);
+      });
+
+    fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`)
+      .then(response => response.json())
+      .then(photos => {
+        let photoList = "";
+
+        photos.forEach(photo => {
+          photoLost += `
+            <div>
+              <p>${photo.title}</p>
+              <img src="${photo.thumbnailUrl}" alt="$photo.title}">
+            </div>
+          `;
+        });
+
+        document.getElementById("photoList").innerHTML = photoList;
+      })
+      .catch(error => {
+        console.log("Error:", error);
+      });
+  </script>
+</body>
+</html>
