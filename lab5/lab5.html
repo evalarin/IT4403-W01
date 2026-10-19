@@ -11,7 +11,7 @@
     <div id="results"></div>
   
   <script>
-    fetch("https://openlibrary.org/search.json?q=web%20development&limit=10")
+    fetch("https://openlibrary.org/search.json?q=web%20development&limit=5")
         .then(response => response.json())
         .then(data => {
             let bookList = "<ul>";
