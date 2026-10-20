@@ -1,1 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Milestone 2 - Book Details</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="bookshelf.html">My Bookshelf</a>
+  </nav>
+
+  <div class="container">
+    <h1>Open Library - Book Details</h1>
+    <div id="bookDetails"></div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <h2>CCSE Department of Information Technology</h2>
+      <p>This website contains my exercises, labs, and projects completed for my IT4403 - Advanced Web and Mobile Application Class.</p>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="email-pill">Email</div>
+      <p><a href="mailto:evalarin@students.kennesaw.edu">evalarin@students.kennesaw.edu</a></p>
+
+      <p><a href="../index.html">Back to Course Homepage</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const workId = params.get("workId");
+    const bookDetails = document.getElementById("bookDetails");
+
+    if (!workId || !/^OL\d+W$/.test(workId)) {
+      bookDetails.textContent = "No valid book selected.";
+    } else {
+      bookDetails.textContent = "Loading book information...";
+
+      fetch(`https://openlibrary.org/works/${workId}.json`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Unable to retrieve book.");
+        }
+        return response.json();
+      })
+      .then(book => {
+        let description = "Description unavailable.";
+
+        if (typeof book.description === "string") {
+          description = book.description;
+        } else if (book.description && book.description.value) {
+          description = book.description.value;
+        }
+
+        const subjects = book.subjects
+          ? book.subjects.slice(0, 10).join(", ")
+          : "Subjects unavailable.";
+
+        const cover = book.covers && book,covers.length > 0
+          ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg`
+          : "https://placehold.co/180x250?text=No+Cover";
+
+        const bookCard = document.createElement("div");
+        bookCard.className = "book";
+
+        const coverDiv = document.createElement("div");
+        coverDiv.className = "book-cover";
+
+        const coverImage = document.createElement("img");
+        coverImage.src = cover;
+        coverImage.alt = `${book.title} cover`;
+        coverDiv.appendChild(coverImage);
+
+        const infoDiv = document.createElement("div");
+        infoDiv.className = "book-info";
+
+        const heading = document.createElement("h2");
+        heading.textContent = book.title;
+        infoDiv.appendChild(heading);
+
+        function addInfo(label, value) {
+          const paragraph = document.createElement("p");
+          const bold = document.createElement("strong");
+          bold.textContent = label + ": ";
+          paragraph.appendChild(bold);
+          paragraph.appendChild(document.createTextNode(value));
+          infoDiv.appendChild(paragraph);
+        }
+
+        addInfo("Work ID", workId);
+        addInfo("Description", description);
+        addInfo("Subjects", subjects);
+
+        const link = document.createElement("a");
+        link.href = `https://openlibrary.org/works/${workId}`;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "View on Open Library";
+
+        const linkParagraph = document.createElement("p");
+        linkParagraph.appendChild(link);
+        infoDiv.appendChild(linkParagraph);
+
+        bookCard.appendChild(coverDiv);
+        bookCard.appendChild(infoDiv);
+
+        bookDetails.replaceChildren(bookCard);
+      })
+      .catch(error => {
+        bookDetails.textContent = "Unable to load book details. Please try again.";
+        console.log("Error:", error);
+      });
+    }
+  </script>
+</body>
+</html>
