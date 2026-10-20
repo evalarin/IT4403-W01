@@ -1,0 +1,184 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fb;
+  color: #333;
+}
+header {
+  background: #0897b3;
+  color: white;
+}
+
+.header-top {
+  text-align: center;
+  padding: 55px 20px 35px;
+}
+
+.header-top h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.header-top h1 {
+  color: #ffe98d;
+  font-size: 48px;
+  margin: 10px 0;
+}
+
+.header-top p {
+  margin: 0;
+  font-size: 20px;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 35px;
+  padding: 20px;
+  border-top: 1px solid rgba(255,255,255,.4);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+nav a:hover {
+  color: #ffe98d;
+}
+.welcome {
+  text-align: center;
+  padding: 65px 20px;
+}
+
+.welcome h2 {
+  color: #003366;
+  font-size: 30px;
+}
+
+.welcome p {
+  max-width: 650px;
+  margin: auto;
+  line-height: 1.7;
+}
+.coursework {
+  background: #0897b3;
+  text-align: center;
+  padding: 60px 20px 90px;
+}
+
+.coursework h2 {
+  color: white;
+  font-size: 30px;
+  margin-bottom: 65px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.card {
+  position: relative;
+  background: #f8e9a7;
+  color: #333;
+  width: 260px;
+  min-height: 220px;
+  padding: 55px 20px;
+  border-radius: 15px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,.1);
+  transition: transform .2s;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  background: #d49ce6;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  top: -17px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.card h3 {
+  font-size: 23px;
+  margin: 15px 0 25px;
+}
+
+.card p {
+  font-size: 17px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+.footer-top {
+  background: #0897b3;
+  color: white;
+  text-align: center;
+  padding: 45px 20px;
+}
+
+.footer-top h2 {
+  font-size: 26px;
+}
+
+.footer-top p {
+  max-width: 650px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+.footer-bottom {
+  background: #d49ce6;
+  text-align: center;
+  padding: 25px;
+}
+
+.email-pill {
+  display: inline-block;
+  background: #f8e58f;
+  color: #333;
+  padding: 8px 22px;
+  border-radius: 25px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.footer-bottom a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  nav {
+    gap: 15px;
+  }
+
+  nav a {
+    font-size: 14px;
+  }
+
+  .header-top h1 {
+    font-size: 38px;
+  }
+
+  .cards {
+    gap: 35px;
+  }
+}
