@@ -180,8 +180,8 @@ nav a:hover {
   .cards {
     gap: 35px;
   }
-
-  .labs-page {
+}
+.labs-page {
   max-width: 900px;
   margin: 50px auto;
   padding: 0 20px;
@@ -221,5 +221,4 @@ nav a:hover {
 
 .lab-section a:hover {
   text-decoration: underline;
-}
 }
