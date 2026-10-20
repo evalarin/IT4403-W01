@@ -43,17 +43,16 @@
     const searchInput = document.getElementById("searchInput");
     const searchButton = document.getElementById("searchButton");
     const searchResults = document.getElementById("searchResults");
+    const pageControls = document.getElementById("pageControls");
+    let currentSearch = "";
+    const resultsPerPage = 10;
 
-    searchButton.addEventListener("click", function() {
+    function searchBooks(page) {
+      const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(currentSearch)}&limit=${resultsPerPage}&page=${page}`;
       const searchTerm = searchInput.value.trim();
 
-      if (searchTerm === "") {
-        searchResults.textContent = "Please enter a book title or keyword.";
-        return;
-      }
-
-      const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(searchTerm)}&limit=10&page=1`;
       searchResults.textContent = "Searching for books...";
+      pageControls.innerHTML = "";
 
       fetch(url)
         .then(response => {
@@ -63,19 +62,19 @@
           return response.json();
         })
         .then(data => {
-          let html = "";
-
           if (data.docs.length === 0) {
             searchResults.textContent = "No books found. Try another search.";
             return;
           }
 
+          let html = "";
+
           data.docs.forEach(book => {
-            let cover = book.cover_i
+            const cover = book.cover_i
               ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
               : "https://placehold.co/180x250?text=No+Cover";
 
-            let workId = book.key.split("/").pop();
+            const workId = book.key.split("/").pop();
 
             html += `
               <div class="book">
@@ -100,11 +99,46 @@
           });
 
           searchResults.innerHTML = html;
+
+          const totalPages = Math.min(
+            6,
+            Math.ceil(data.numFound / resultsPerPage)
+          );
+
+          if (totalPages > 1) {
+            let options = "";
+
+            for (let i = 1; i <= totalPages; i++) {
+              options += `<option value="${i}" ${i === page ? "selected" : ""}>Page ${i}</option>`;
+            }
+
+            pageControls.innerHTML = `
+              <label for="pageSelect">Select Page: </label>
+              <select id="pageSelect">${options}</select>
+            `;
+
+            document.getElementById("pageSlect")
+              .addEventListerner("change", function() {
+                searchBooks(Number(this.value));
+              });
+          }
         })
         .catch(error => {
           searchResults.textContent = "Unable to load books. Please try again.";
           console.log("Error:", error);
         });
+    }
+
+    searchButton.addEventListener("click", function() {
+      currentSearch = searchInput.value.trim();
+
+      if (currentSearch === "") {
+        searchResults.textContent = "Please enter a book title or keyword.";
+        pageControls.innerHTML = "";
+        return;
+      }
+
+      searchBooks(1);
     });
   </script>
 </body>
