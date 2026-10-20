@@ -1,1 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Milestone 2 - Bookshelf</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="bookshelf.html">My Bookshelf</a>
+  </nav>
+
+  <div class="container">
+    <h1>My Bookshelf</h1>
+    <div id="bookshelf"></div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <h2>CCSE Department of Information Technology</h2>
+      <p>This website contains my exercises, labs, and projects completed for my IT4403 - Advanced Web and Mobile Application Class.</p>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="email-pill">Email</div>
+      <p><a href="mailto:evalarin@students.kennesaw.edu">evalarin@students.kennesaw.edu</a></p>
+
+      <p><a href="../index.html">Back to Course Homepage</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const bookIds = [
+      "OL82563W",
+      "OL82536W",
+      "OL82537W",
+      "OL82538W",
+      "OL82539W"
+    ];
+
+    const bookshelf = document.getElementById("bookshelf");
+    bookshelf.textContent = "Loading bookshelf...";
+
+    const requests = bookIds.map(workId =>
+      fetch(`https://openlibrary.org/works/${workId}.json`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Unable to load book.");
+          }
+          return response.json();
+        })
+    );
+
+    Promise.all(requests)
+      .then(books => {
+        bookShelf.innerHTML = "";
+
+        books.forEach(book => {
+          const workID = book.key.split("/").pop();
+
+          const cover = book.covers && book.covers.length > 0
+            ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg`
+            : "https://placehold.co/180x250?text=No+Cover";
+
+          bookshelf.innerHTML += `
+            <div class="book">
+              <div class-"book-cover">
+                <img src="${cover}" alt="${book.title} cover">
+              </div>
+
+              <div class="book-info">
+                <h2>
+                  <a href="details.html?workId=${workId}">
+                    ${book.title}
+                  </a>
+                </h2>
+              </div>
+            </div>
+          `;
+        });
+      })
+      .catch(error => {
+        bookshelf.textContent = "Unable to load bookshelf. Please try again.";
+        console.log("Error:", error);
+      });
+  </script>
+</body>
+</html>
