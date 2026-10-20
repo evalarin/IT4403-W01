@@ -117,8 +117,8 @@
               <select id="pageSelect">${options}</select>
             `;
 
-            document.getElementById("pageSlect")
-              .addEventListerner("change", function() {
+            document.getElementById("pageSelect")
+              .addEventListener("change", function() {
                 searchBooks(Number(this.value));
               });
           }
