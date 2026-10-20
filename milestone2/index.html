@@ -38,5 +38,71 @@
       <p><a href="../index.html">Back to Course Homepage</a></p>
     </div>
   </footer>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const searchButton = document.getElementById("searchButton");
+    const searchResults = document.getElementById("searchResults");
+
+    searchButton.addEventListener("click", function() {
+      const searchTerm = searchInput.value.trim();
+
+      if (searchTerm === "") {
+        searchResults.textContent = "Please enter a book title or keyword.";
+        return;
+      }
+
+      const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(searchTerm)}&limit=10&page=1`;
+      searchResults.textContent = "Searching for books...";
+
+      fetch(url)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Unable to retrieve books.");
+          }
+          return response.json();
+        })
+        .then(data => {
+          let html = "";
+
+          if (data.docs.length === 0) {
+            searchResults.textContent = "No books found. Try another search.";
+            return;
+          }
+
+          data.docs.forEach(book => {
+            let cover = book.cover_i
+              ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+              : "https://placehold.co/180x250?text=No+Cover";
+
+            let workId = book.key.split("/").pop();
+
+            html += `
+              <div class="book">
+                <div class="book-cover">
+                  <img src="${cover}" alt="${book.title} cover">
+                </div>
+                <div class="book-info">
+                  <h2>
+                    <a href="details.html?workId=${workId}">
+                      ${book.title}
+                    </a>
+                  </h2>
+                  <p><strong>Author(s):</strong>
+                    ${book.first_publish_year || "Not Available"}
+                  </p>
+                </div>
+              </div>
+            `;
+          });
+
+          searchResults.innerHTML = html;
+        })
+        .catch(error => {
+          searchResults.textContent = "Unable to load books. Please try again.";
+          console.log("Error:", error);
+        });
+    });
+  </script>
 </body>
 </html>
