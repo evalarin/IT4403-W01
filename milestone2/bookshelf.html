@@ -56,10 +56,10 @@
 
     Promise.all(requests)
       .then(books => {
-        bookShelf.innerHTML = "";
+        bookshelf.innerHTML = "";
 
         books.forEach(book => {
-          const workID = book.key.split("/").pop();
+          const workId = book.key.split("/").pop();
 
           const cover = book.covers && book.covers.length > 0
             ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg`
@@ -67,7 +67,7 @@
 
           bookshelf.innerHTML += `
             <div class="book">
-              <div class-"book-cover">
+              <div class="book-cover">
                 <img src="${cover}" alt="${book.title} cover">
               </div>
 
