@@ -4,51 +4,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elena Valarino | Exercises</title>
+  <title>Exercises | IT4403</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header>
-    <div class="header-top">
-      <h2>Elena Valarino</h2>
-      <h1>IT 4403</h1>
-      <p>Kennesaw State University</p>
-    </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <strong>Elena Valarino</strong>
+        <small>IT 4403 · Kennesaw State University</small>
+    </a>
 
-    <nav>
+    <nav aria-label="Main navigation">
       <a href="index.html">HOME</a>
-      <a href="exercises.html">EXERCISES</a>
+      <a href="exercises.html" aria-current="page">EXERCISES</a>
       <a href="labs.html">LABS</a>
       <a href="projects.html">PROJECTS</a>
     </nav>
+    </div>
   </header>
 
-  <main class="welcome">
-    <h2>Exercises</h2>
-    <p>This page contains exercises completed throughout IT4403.</p>
-    <p>Exercises will be added as they are completed.</p>
+  <main class="container page-content">
+    <div class="banner"></div>
+    <section class="intro-card">
+      <h1>Exercises</h1>
+      <p>
+        This page contains exercises completed throughout IT4403. 
+        Exercises will be added as they are completed.
+      </p>
+
+      <div class="dots" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </section>
+
+    <section class="directory-panel">
+      <div class="directory-item">
+        <span class="item-number">2</span>
+        <div class="item-info">
+          <h2>Lab 2: jQuery Exercises</h2>
+        </div>
+      </div>
+
+      <div class="exercise-links">
+        <a href="lab2/exercise1.html">Exercise 1: JavaScript and jQuery</a>
+        <a href="lab2/exercise2.html">Exercise 2: Event Handling</a>
+        <a href="lab2/exercise3.html">Exercise 3: Selectors and CSS</a>
+        <a href="lab2/exercise4.html">Exercise 4: Tables and Events</a>
+        <a href="lab2/exercise5.html">Exercise 5: Visual Effects</a>
+        <a href="lab2/exercise6.html">Exercise 6: Calculator</a>
+        <a href="lab2/exercise7.html">Exercise 7: Picture Browser</a>
+      </div>
+
+      <div class="directory-item" style="margin-top: 20px;">
+        <span class="item-number">3</span>
+        <div class="item-info">
+          <h2>Lab 3: JSON Exercises</h2>
+        </div>
+      </div>
+
+      <div class="exercise-links">
+        <a href="lab3/exercise1.html">Exercise 1: JSON Structure</a>
+        <a href="lab3/exercise2.html">Exercise 2: JSON Validation</a>
+        <a href="lab3/exercise3.html">Exercise 3: Reading JSON</a>
+        <a href="lab3/exercise4.html">Exercise 4: Nested JSON</a>
+        <a href="lab3/exercise5.html">Exercise 5: Weather Data</a>
+        <a href="lab3/exercise6.html">Exercise 6: Movie Data</a>
+      </div>
+
+      <div class="directory-item" style="margin-top: 20px;">
+        <span class="item-number">4</span>
+        <div class="item-info">
+          <h2>Lab 4: RESTful Web API Exercises</h2>
+        </div>
+      </div>
+
+      <div class="exercise-links">
+        <a href="lab4/page1.html">Exercise 1: API Users and Albums</a>
+      </div>
+
+      <div class="directory-item" style="margin-top: 20px;">
+        <span class="item-number">5</span>
+        <div class="item-info">
+          <h2>Lab 5: Open Library API Exercises</h2>
+        </div>
+      </div>
+
+      <div class="exercise-links">
+        <a href="lab5/lab5.html">Exercise 1: Book Search</a>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <div class="footer-top">
-      <h2>CCSE Department of Information Technology</h2>
-      <p>
-        This website contains my exercises, labs, and projects
-        completed for my IT4403 - Advanced Web and Mobile
-        Applications Class.
-      </p>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="email-pill">Email</div>
-      <p>
-        <a href="mailto:evalarin@students.kennesaw.edu">
-          evalarin@students.kennesaw.edu
-        </a>
-      </p>
-      <p><a href="index.html">Back to Home</a></p>
-    </div>
+  <footer class="site-footer">
+    <p>
+      Elena Valarino | IT4403 | Kennesaw State University
+    </p>
   </footer>
 </body>
 </html>
