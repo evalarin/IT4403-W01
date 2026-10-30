@@ -3,90 +3,116 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elena Valarino | Labs</title>
+  <title>Labs | IT4403</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header>
-    <div class="header-top">
-      <h2>Elena Valarino</h2>
-      <h1>IT 4403</h1>
-      <p>Kennesaw State University</p>
-    </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <strong>Elena Valarino</strong>
+        <small>IT 4403 · Kennesaw State University</small>
+      </a>
 
     <nav>
       <a href="index.html">HOME</a>
       <a href="exercises.html">EXERCISES</a>
-      <a href="labs.html">LABS</a>
+      <a href="labs.html" aria-current="page">LABS</a>
       <a href="projects.html">PROJECTS</a>
     </nav>
+    </div>
   </header>
 
-  <main class="labs-page">
-    <h1>Labs</h1>
+  <main class="container page-content">
+    <div class="banner"></div>
 
-    <section class="lab-section">
-      <h2>Lab 2: jQuery</h2>
-      <p>This lab demonstrates the use of jQuery for event handling, DOM manipulation, CSS changes, visual effects, and interactive web applications.</p>
-      <ul>
-        <li><a href="lab2/exercise1.html">Exercise 1: JavaScript and jQuery Comparison</a></li>
-        <li><a href="lab2/exercise2.html">Exercise 2: jQuery ready() and Event Handling</a></li>
-        <li><a href="lab2/exercise3.html">Exercise 3: Selectors, DOM, and CSS</a></li>
-        <li><a href="lab2/exercise4.html">Exercise 4: Table Selection and Event Handling</a></li>
-        <li><a href="lab2/exercise5.html">Exercise 5: jQuery Visual Effects</a></li>
-        <li><a href="lab2/exercise6.html">Exercise 6: Calculator Application</a></li>
-        <li><a href="lab2/exercise7.html">Exercise 7: Picture Browser Application</a></li>
-      </ul>
+    <section class="intro-card">
+      <h1>Labs</h1>
+      <p>
+        These labs are hands-on assignments that help me
+        practice web development using different tools
+        and technologies.
+      </p>
+
+      <div class="dots" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </section>
 
-    <section class="lab-section">
-      <h2>Lab 3: JSON</h2>
-      <p>This lab demonstrates the use of JSON structures, validation, and reading and displaying JSON data using JavaScript and jQuery.</p>
-      <ul>
-        <li><a href="lab3/exercise1.html">Exercise 1: JSON Structure</a></li>
-        <li><a href="lab3/exercise2.html">Exercise 2: JSON Creation and Validation</a></li>
-        <li><a href="lab3/exercise3.html">Exercise 3: Reading JSON Values</a></li>
-        <li><a href="lab3/exercise4.html">Exercise 4: Nested JSON Data</a></li>
-        <li><a href="lab3/exercise5.html">Exercise 5: Weather JSON</a></li>
-        <li><a href="lab3/exercise6.html">Exercise 6: Movie Information JSON</a></li>
-      </ul>
-    </section>
+    <section class="directory-panel">
 
-    <section class="lab-section">
-      <h2>Lab 4: RESTful Web APIs</h2>
-      <ul>
-        <li><a href="lab4/page1.html">Exercise 1: Users</a></li>
-      </ul>
-    </section>
+      <div class="directory-item">
+        <span class="item-number">2</span>
+        <div class="item-info">
+          <h2>Lab 2: jQuery</h2>
+          <p>This lab demonstrates the use of jQuery for event handling, DOM manipulation, CSS changes, visual effects, and interactive web applications.</p>
+        </div>
+      </div>
+      <div class="exercise-links">
+        <a href="lab2/exercise1.html">Exercise 1</a>
+        <a href="lab2/exercise2.html">Exercise 2</a>
+        <a href="lab2/exercise3.html">Exercise 3</a>
+        <a href="lab2/exercise4.html">Exercise 4</a>
+        <a href="lab2/exercise5.html">Exercise 5</a>
+        <a href="lab2/exercise6.html">Exercise 6</a>
+        <a href="lab2/exercise7.html">Exercise 7</a>
+      </div>
 
-    <section class="lab-section">
-      <h2>Lab 5: Open Library API</h2>
-      <ul>
-        <li><a href="lab5/lab5.html">Exercise 1: Data Analysis Books</a></li>
-      </ul>
+      <div class="directory-item" style="margin-top: 20px;">
+        <span class="item-number">3</span>
+        <div class="item-info">
+          <h2>Lab 3: JSON</h2>
+          <p>Working with JSON data and JavaScript.</p>
+        </div>
+      </div>
+
+      <div class="exercise-links">
+        <a href="lab3/exercise1.html">Exercise 1</a>
+        <a href="lab3/exercise2.html">Exercise 2</a>
+        <a href="lab3/exercise3.html">Exercise 3</a>
+        <a href="lab3/exercise4.html">Exercise 4</a>
+        <a href="lab3/exercise5.html">Exercise 5</a>
+        <a href="lab3/exercise6.html">Exercise 6</a>
+      </div>
+
+      <div class="directory-item" style="margin-top: 20px;">
+        <span class="item-number">4</span>
+        <div class="item-info">
+          <h2>Lab 4: RESTful Web APIs</h2>
+          <p>Using an API to retrieve and display data.</p>
+        </div>
+      </div>
+
+      <div class="exercise-links">
+        <a href="lab4/page1.html">View Lab 4</a>
+      </div>
+
+      <div class="directory-item" style="margin-top: 20px;">
+        <span class="item-number">5</span>
+        <div class="item-info">
+          <h2>Lab 5: Open Library API</h2>
+          <p>Searching and displaying book information.</p>
+        </div>
+      </div>
+
+      <div class="exercise-links">
+        <a href="lab5/lab5.html">View Lab 5</a>
+      </div>
+      
     </section>
   </main>
 
-  <footer>
-    <div class="footer-top">
-      <h2>CCSE Department of Information Technology</h2>
-      <p>
-        This website contains my exercises, labs, and projects
-        completed for my IT4403 - Advanced Web and Mobile
-        Applications Class.
-      </p>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="email-pill">Email</div>
-      <p>
-        <a href="mailto:evalarin@students.kennesaw.edu">
-          evalarin@students.kennesaw.edu
-        </a>
-      </p>
-      <p><a href="index.html">Back to Home</a></p>
-    </div>
+  <footer class="site-footer">
+    <p>
+      Elena Valarino | IT 4403 |
+      Kennesaw State University
+    </p>
   </footer>
+
 </body>
 </html>
+
+    
