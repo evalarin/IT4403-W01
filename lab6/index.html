@@ -12,13 +12,13 @@
         //use the load function
         $("#button1").click(function ()
         {
-            $("#ajaxDiv1").load("ajax-dynamic-response.html").hide().fadeIn("slow");
-	    {
-	    	if (status == "success")
-		{
-		    $("#ajaxDiv1").append("<p>Updated content loaded successfully!</p>");
-		}
-	    }).hide().fadeIn("slow");
+            $("#ajaxDiv1").load("ajax-dynamic-response.html", function(response, status)
+	    	{
+	    		if (status == "success")
+				{
+		    		$("#ajaxDiv1").append("<p>Updated content loaded successfully!</p>");
+				}
+	    	}).hide().fadeIn("slow");
         });
 
         //use the .get function
