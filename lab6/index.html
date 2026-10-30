@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery AJAX load HTML (AJAH)</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        $("#ajaxDiv0").hide();
+
+        //use the load function
+        $("#button1").click(function ()
+        {
+            $("#ajaxDiv1").load("ajax-dynamic-response.html").hide().fadeIn("slow");
+	    {
+	    	if (status == "success")
+		{
+		    $("#ajaxDiv1").append("<p>Updated content loaded successfully!</p>");
+		}
+	    }).hide().fadeIn("slow");
+        });
+
+        //use the .get function
+        $("#button2").click(function ()
+        {
+            $.get("ajax-dynamic-response.php?parameter=5000", function (data)
+            {
+                $("#ajaxDiv2").html(data).hide().fadeIn("slow");
+            });
+        });
+        
+        //use .ajax function, and an alternative way to send a parameter
+        $("#button3").click(function ()
+        {
+            $.ajax("ajax-dynamic-response.php", {data:{parameter:15500}}).done(function (data)
+            {
+                $("#ajaxDiv3").html(data).hide().animate({ opacity: "show" }, { duration: "slow" });
+            });
+        });
+    });
+</script>
+
+</head>
+<body>
+    <h1>jQuery AJAX loading HTML using .load(), .get(), .ajax()</h1>
+    <p>This demo shows how jQuery AJAX methods (.load(), .get(), and .ajax()) request data from a server and dynamically update parts of a webpage without reloading the page. jQuery AJAX methods make AJAX easier and shorter to write.</p>
+	<h2>Load partial page content using .load() - no parameter</h2>
+    <input type="button" id="button1" value="Load Updated Content" />
+    
+    <h3>Updated AJAX Response</h3>
+    <div id="ajaxDiv1"></div>
+
+    <h2>Load partial page content using .get() - parameter value 5000</h2>
+    <input type="button" id="button2" value="Click me to load some partial page content" />
+    <div id="ajaxDiv2"></div>
+
+    <h2>Load partial page content using .ajax() - parameter value 155000</h2>
+    <input type="button" id="button3" value="Click me to load some partial page content" />
+    <div id="ajaxDiv3"></div>
+
+</body>
+</html>
