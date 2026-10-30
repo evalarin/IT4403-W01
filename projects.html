@@ -3,67 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elena Valarino | Projects</title>
+  <title>Projects | IT 4403</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header>
-    <div class="header-top">
-      <h2>Elena Valarino</h2>
-      <h1>IT 4403</h1>
-      <p>Kennesaw State University</p>
-    </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <strong>Elena Valarino</strong>
+        <small>IT 4403 · Kennesaw State University</small>
+      </a>
 
-    <nav>
-      <a href="index.html">HOME</a>
-      <a href="exercises.html">EXERCISES</a>
-      <a href="labs.html">LABS</a>
-      <a href="projects.html">PROJECTS</a>
-    </nav>
+      <nav aria-label="Main navigation">
+        <a href="index.html">HOME</a>
+        <a href="exercises.html">EXERCISES</a>
+        <a href="labs.html">LABS</a>
+        <a href="projects.html" aria-current="page">PROJECTS</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="labs-page">
-    <h1>Projects</h1>
+  <main class="container page-content">
+    <div class="banner"></div>
 
-    <section class="lab-section">
-      <h2>Individual Project - Milestone 1</h2>
-      <p>This milestone demonstrates displaying book information using JSON data from Open Library.</p>
-      <ul>
-        <li><a href="milestone1/book.html">Single Book Display</a></li>
-        <li><a href="milestone1/search.html">Book Search Results</a></li>
-      </ul>
+    <section class="intro-card">
+      <h1>Projects</h1>
+      <p>
+        This section includes my larger assignments and
+        project milestones completed throughout the semester.
+      </p>
+
+      <div class="dots" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </section>
 
-    <section class="lab-section">
-      <h2>Individual Project - Milestone 2</h2>
-      <p>This milestone demonstrates using the Open Library API to search for books, view book details, and display a personal bookshelf.</p>
-      <ul>
-        <li><a href="milestone2/index.html">Book Search</a></li>
-        <li><a href="milestone2/bookshelf.html">My Bookshelf</a></li>
-      </ul>
+    <section class="directory-panel">
+
+    <div class="directory-item">
+      <span class="item-number">1</span>
+      <div class="item-info">
+        <h2>Individual Project - Milestone 1</h2>
+        <p>This milestone demonstrates displaying book information using JSON data from Open Library.</p>
+      </div>
+    </div>
+      
+      <div class="exercise-links">
+        <a href="milestone1/book.html">Single Book Display</a>
+        <a href="milestone1/search.html">Book Search Results</a>
+      </div>
+
+    <div class="directory-item" style="margin-top: 20px;">
+      <span class="item-number">2</span>
+      <div class="item-info">
+        <h2>Individual Project - Milestone 2</h2>
+        <p>This milestone demonstrates using the Open Library API to search for books, view book details, and display a personal bookshelf.</p>
+      </div>
+      
+      <div class="exercise-links">
+        <a href="milestone2/index.html">Book Search</a>
+        <a href="milestone2/bookshelf.html">My Bookshelf</a>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-top">
-      <h2>CCSE Department of Information Technology</h2>
-      <p>
-        This website contains my exercises, labs, and projects
-        completed for my IT4403 - Advanced Web and Mobile
-        Applications Class.
-      </p>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="email-pill">Email</div>
-      <p>
-        <a href="mailto:evalarin@students.kennesaw.edu">
-          evalarin@students.kennesaw.edu
-        </a>
-      </p>
-      <p><a href="index.html">Back to Home</a></p>
-    </div>
+  <footer class="site-footer">
+    <p>
+      Elena Valarino | IT 4403 |
+      Kennesaw State University
+    </p>
   </footer>
 </body>
 </html>
