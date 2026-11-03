@@ -35,7 +35,7 @@ $(document).ready(function () {
           bookItem.append(title);
 
           if (book.cover_i) {
-            var cover = $$("<img>")
+            var cover = $("<img>")
               .attr("src", "https://covers.openlibrary.org/b/id/" + book.cover_i + "-S.jpg")
               .attr("alt", "Cover of " + (book.title || "book"));
 
