@@ -9,7 +9,6 @@
     {
         $("#ajaxDiv0").hide();
 
-        //use the load function
         $("#button1").click(function ()
         {
             $("#ajaxDiv1").load("ajax-dynamic-response.html", function(response, status)
@@ -21,7 +20,6 @@
 	    	}).hide().fadeIn("slow");
         });
 
-        //use the .get function
         $("#button2").click(function ()
         {
             $.get("ajax-dynamic-response.php?parameter=5000", function (data)
@@ -30,7 +28,7 @@
             });
         });
         
-        //use .ajax function, and an alternative way to send a parameter
+
         $("#button3").click(function ()
         {
             $.ajax("ajax-dynamic-response.php", {data:{parameter:15500}}).done(function (data)
@@ -59,5 +57,6 @@
     <input type="button" id="button3" value="Click me to load some partial page content" />
     <div id="ajaxDiv3"></div>
 
+	<p><a href="../index.html">Back to Home</a></p>
 </body>
 </html>
