@@ -102,4 +102,67 @@ $(document).ready(function () {
       $("<p>").text("Page " + currentPage + " of " + totalPages)
     );
   }
+
+  function displayBookDetails(book) {
+    $("#bookDetails").text("Loading book details...");
+
+    $.ajax({
+      url: "https://openlibrary.org/search.json",
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+        $("#bookDetails").empty();
+
+        var title = data.title || book.title || "Unknown Title";
+        var authors = book.author_name
+          ? book.author_name.join(", ")
+          : "Unkown Author";
+
+        var description = "No description available.";
+
+        if (typeof data.description === "string") {
+          description = data.description;
+        } else if (data.description && data.description.value) {
+          description = data.description.value;
+        }
+
+        var subjects = data.subjects
+          ? data.subjects.slice(0, 10).join(", ")
+          : "No subjects available.";
+
+        $("bookDetails").append($("<h3>").text(title));
+        $("bookDetails").append($("<p>").text("Work ID: " + book.key));
+        $("bookDetails").append($("<p>").text("Author(s): " + authors));
+        $("bookDetails").append($("<p>").text("Description: " + description));
+        $("bookDetails").append($("<p>").text("Subjects: " + subjects));
+
+        var coverId = data.covers && data.covers.length
+          ? data.covers[0]
+          : book.cover_i;
+
+        if (coverId) {
+          $("#bookDetails").append(
+            $("<img>")
+              .attr("src", "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg")
+              .attr("alt", "Cover of " + title)
+            );
+        } else {
+          $("#bookDetails").append($("<p>").text("No cover available."));
+        }
+
+        $("#bookDetails").append(
+          $("<p>").append(
+            $("<a>")
+              .attr("href", "https://openlibrary.org" + book.key)
+              .attr("target", "_blank")
+              .attr("rel", "noopener noreferrer")
+              .text("View on Open Library")
+            )
+          );
+      },
+      error: function () {
+        $("#bookDetails").text("Unable to load book details. Please try again.");
+      }
+    });
+  }
 });
