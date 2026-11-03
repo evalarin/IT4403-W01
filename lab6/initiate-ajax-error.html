@@ -9,7 +9,7 @@
     {
         $("#button1").click(function ()
         {
-            $.getJSON("https://www.googleapis.com/books/v1/volumes?q=php%20mysql", function (data)
+            $.getJSON("books.json", function (data)
 			{
 				$("#ajaxDiv1").text("First book: " + data.items[0].volumeInfo.title);
 			}).fail(function ()
