@@ -9,7 +9,7 @@
     {
         $("#button1").click(function ()
         {
-            $.getJSON("books.json", function (data)
+            $.getJSON("https://www.googleapis.com/books/v1/volumes?q=php%20mysql", function (data)
 			{
 				$("#ajaxDiv1").text("First book: " + data.items[0].volumeInfo.title);
 			}).fail(function ()
@@ -21,7 +21,7 @@
 		$("#button2").click(function (event)
         {
 			event.preventDefault();
-			$.getJSON("books.json", function (data)
+			$.getJSON("https://www.googleapis.com/books/v1/volumes?q=php%20mysql", function (data)
 			{
 				$("#ajaxDiv1").text("First book: " + data.items[0].volumeInfo.title);
 			}).fail(function ()
