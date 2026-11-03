@@ -111,7 +111,7 @@ $(document).ready(function () {
     $("#bookDetails").text("Loading book details...");
 
     $.ajax({
-      url: "https://openlibrary.org/search.json",
+      url: "https://openlibrary.org" + book.key + ".json",
       type: "GET",
       dataType: "json",
       success: function (data) {
@@ -134,11 +134,11 @@ $(document).ready(function () {
           ? data.subjects.slice(0, 10).join(", ")
           : "No subjects available.";
 
-        $("bookDetails").append($("<h3>").text(title));
-        $("bookDetails").append($("<p>").text("Work ID: " + book.key));
-        $("bookDetails").append($("<p>").text("Author(s): " + authors));
-        $("bookDetails").append($("<p>").text("Description: " + description));
-        $("bookDetails").append($("<p>").text("Subjects: " + subjects));
+        $("#bookDetails").append($("<h3>").text(title));
+        $("#bookDetails").append($("<p>").text("Work ID: " + book.key));
+        $("#bookDetails").append($("<p>").text("Author(s): " + authors));
+        $("#bookDetails").append($("<p>").text("Description: " + description));
+        $("#bookDetails").append($("<p>").text("Subjects: " + subjects));
 
         var coverId = data.covers && data.covers.length
           ? data.covers[0]
@@ -174,7 +174,7 @@ $(document).ready(function () {
     $("#bookCollection").text("Loading collection...");
 
     $.ajax({
-      url: "https://openlibrary.org/search.json",
+      url: "https://openlibrary.org/subjects/fantasy.json",
       type: "GET",
       dataType: "json",
       data: {
@@ -221,7 +221,7 @@ $(document).ready(function () {
           if (book.cover_id) {
             bookItem.append(
               $("<img>")
-                .attr("src", "https://covers.openlibrary.org/b/id/" + book.coverId + "-S.jpg")
+                .attr("src", "https://covers.openlibrary.org/b/id/" + book.cover_id + "-S.jpg")
                 .attr("alt", "Cover of " + (book.title || "book"))
               );
           } else {
