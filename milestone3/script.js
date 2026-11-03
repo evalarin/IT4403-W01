@@ -38,26 +38,6 @@ $(document).ready(function () {
         currentPage = 1;
         displayBooks();
       },
-
-        $.each(data.docs.slice(0,10), function (index, book) {
-          var bookItem = $("<div>").addClass("book-item");
-
-          var title = $("<p>").text(book.title || "Unknown Title");
-          bookItem.append(title);
-
-          if (book.cover_i) {
-            var cover = $("<img>")
-              .attr("src", "https://covers.openlibrary.org/b/id/" + book.cover_i + "-S.jpg")
-              .attr("alt", "Cover of " + (book.title || "book"));
-
-              bookItem.append(cover);
-          } else {
-            bookItem.append($("<p>").text("No cover available."));
-          }
-
-          $("#searchResults").append(bookItem);
-        });
-      },
       error: function () {
         $("#searchResults").text("Unable to load books. Please try again.");
       }
