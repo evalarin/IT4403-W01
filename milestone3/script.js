@@ -55,7 +55,15 @@ $(document).ready(function () {
     $.each(pageBooks, function (index, book) {
       var bookItem = $("<div>").addClass("book-item");
 
-      var title = $("<p>").text(book.title || "Unknown Title");
+      var title = $("<a>")
+        .attr("href", "#")
+        .text(book.title || "Unknown Title");
+
+      title.click(function (event) {
+        event.preventDefault();
+        displayBookDetails(book);
+      });
+      
       bookItem.append(title);
 
       if (book.cover_i) {
