@@ -169,4 +169,73 @@ $(document).ready(function () {
       }
     });
   }
+
+  function loadCollection() {
+    $("#bookCollection").text("Loading collection...");
+
+    $.ajax({
+      url: "https://openlibrary.org/search.json",
+      type: "GET",
+      dataType: "json",
+      data: {
+        limit: 10
+      },
+      success: function (data) {
+        $("#bookCollection").empty();
+
+        if (!data.works || data.works.length === 0) {
+          $("#bookCollection").text("No books available.");
+          return;
+        }
+
+        $.each(data.works, function (index, book) {
+          var bookItem = $("<div>").addClass("book-item");
+
+          var title = $("<a>")
+            .attr("href", "#")
+            .text(book.title || "Unknown Title");
+
+          title.click(function (event) {
+            event.preventDefault();
+
+            var selectedBook = {
+              key: book.key,
+              title: book.title,
+              cover_i: book.cover_id,
+              author_name: book.authors
+                ? book.authors.map(function (author) {
+                  return author.name;
+                })
+                : []
+            };
+
+            displayBookDetails(selectedBook);
+
+            $("html, body").animate({
+              scrollTop: $("#detailsSection").offset().top
+            }, 500);
+          });
+
+          bookItem.append(title);
+
+          if (book.cover_id) {
+            bookItem.append(
+              $("<img>")
+                .attr("src", "https://covers.openlibrary.org/b/id/" + book.coverId + "-S.jpg")
+                .attr("alt", "Cover of " + (book.title || "book"))
+              );
+          } else {
+            bookItem.append($("<p>").text("No cover available."));
+          }
+
+          $("#bookCollection").append(bookItem);
+        });
+      },
+      error: function () {
+        $("#bookCollection").text("Unable to load collection.");
+      }
+    });
+  }
+
+  loadCollection();
 });
