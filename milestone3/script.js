@@ -28,9 +28,16 @@ $(document).ready(function () {
         $("#searchResults").empty();
 
         if (!data.docs || data.docs.length === 0) {
+          books = [];
+          $("#pageControls").empty();
           $("#searchResults").text("No books found.");
           return;
         }
+
+        books = data.docs;
+        currentPage = 1;
+        displayBooks();
+      },
 
         $.each(data.docs.slice(0,10), function (index, book) {
           var bookItem = $("<div>").addClass("book-item");
