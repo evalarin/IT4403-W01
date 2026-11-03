@@ -23,13 +23,13 @@
 			event.preventDefault();
 			$.getJSON("books.json", function (data)
 			{
-				("#ajaxDiv1").text("First book: " + data.items[0].volumeInfo.title);
-		}).fail(function ()
-		{
-			
-            $("#ajaxDiv1").text("Could not load book data.");
-        });
-    });
+				$("#ajaxDiv1").text("First book: " + data.items[0].volumeInfo.title);
+			}).fail(function ()
+			{
+            	$("#ajaxDiv1").text("Could not load book data.");
+        	});
+    	});
+	});
 </script>
 
 </head>
