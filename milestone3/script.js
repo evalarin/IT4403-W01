@@ -62,6 +62,10 @@ $(document).ready(function () {
       title.click(function (event) {
         event.preventDefault();
         displayBookDetails(book);
+
+        $("html, body").animate({
+          scrollTop: $("#detailsSection").offset().top
+        }, 500);
       });
       
       bookItem.append(title);
