@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+  var books = [];
+  var currentPage = 1;
+  var booksPerPage = 10;
+
   $("#searchButton").click(function () {
     var searchTerm = $("#searchInput").val().trim();
 
