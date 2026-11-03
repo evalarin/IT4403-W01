@@ -12,8 +12,9 @@
             $("#ajaxDiv1").load("https://www.googleapis.com/books/v1/volumes?q=php%20mysql").hide().fadeIn("slow");
         });
 		
-		$("#button2").click(function ()
+		$("#button2").click(function (event)
         {
+			event.preventDefault();
             $("#ajaxDiv1").load("https://www.googleapis.com/books/v1/volumes?q=php%20mysql").hide().fadeIn("slow");
         });
     });
