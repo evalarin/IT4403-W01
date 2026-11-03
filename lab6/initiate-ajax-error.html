@@ -9,7 +9,13 @@
     {
         $("#button1").click(function ()
         {
-            $("#ajaxDiv1").load("https://www.googleapis.com/books/v1/volumes?q=php%20mysql").hide().fadeIn("slow");
+            $.getJSON("https://www.googleapis.com/books/v1/volumes?q=php%20mysql", function (data)
+			{
+				$("#ajaxDiv1").text("First book: " + data.items[0].volumeInfo.title);
+			}).fail(function ()
+			{
+				$("#ajaxDiv1").text("Could not load book data.");
+			});
         });
 		
 		$("#button2").click(function (event)
