@@ -392,4 +392,38 @@ nav a[aria-current="page"] {
   .banner {
     height: 65px;
   }
+
+  #bookResults {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .book {
+    box-sizing: border-box;
+    width: 23%;
+    padding: 10px;
+    border: 1px solid gray;
+  }
+
+  .book img {
+    max-width: 100%;
+  }
+  
+  #bookResults.list .book {
+    width: 100%;
+  }
+
+  #bookResults.grid .book {
+    width: 23%;
+  }
+
+  #bookResults.three .book {
+    width: 32%;
+  }
+
+  #bookResults.first .book:first-child {
+    width: 100%;
+  }
 }
