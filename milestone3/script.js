@@ -13,6 +13,7 @@ $(document).ready(function () {
     }
 
     $("#searchResults").text("Loading books...");
+    $("#searchButton).prop("disabled", true);
     $("#pageControls").empty();
 
     $.ajax({
@@ -40,6 +41,9 @@ $(document).ready(function () {
       },
       error: function () {
         $("#searchResults").text("Unable to load books. Please try again.");
+      },
+      complete: function () {
+        $("searchButton").prop("disabled", false);
       }
     });
   });
