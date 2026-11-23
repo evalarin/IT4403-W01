@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Load more data 1: paging - Open Library</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function ()
+    {
+        // search event and actions
+        $("#button1").click(function ()
+        {
+            var term = $("#searchTerm").val().trim();
+            if (term === "")
+            {
+                $("#books").html("<p>Please enter a search term.</p>");
+                $("#book").html("");
+                return;
+            }
+
+            searchBooks(term, 1);
+
+            // create paging
+            $("#pages").html("Pages: ");
+            for (var i = 1; i <= 5; i++)
+            {
+                $("#pages").append("<a class='page' href='#'>" + i + "</a> ");
+            }
+        });
+
+        // add click events to pages so additional ajax can be triggered
+        $("#pages").on("click", ".page", function (event)
+        {
+            event.preventDefault();
+            var page = parseInt($(this).text());
+            var term = $("#searchTerm").val().trim();
+            searchBooks(term, page);
+        });
+    });
+
+    function searchBooks(term, page)
+    {
+        $("#books").html("<p>Searching...</p>");
+        $("#book").html("");
+
+        var servicePoint = "https://openlibrary.org/search.json?q=" +
+                           encodeURIComponent(term) +
+                           "&page=" + page;
+
+        $.ajax({
+            url: servicePoint,
+            method: "GET",
+            dataType: "json",
+            success: function (jsonData)
+            {
+                $("#books").html("<p>Page " + page + "</p>");
+
+                var docs = (jsonData.docs || []).slice(0, 10);
+
+                if (docs.length === 0)
+                {
+                    $("#books").append("<p>No results found.</p>");
+                    return;
+                }
+
+                $.each(docs, function (index, book)
+                {
+                    var cover =
+                        book.cover_i
+                        ? "https://covers.openlibrary.org/b/id/" + book.cover_i + "-M.jpg"
+                        : "https://via.placeholder.com/80x120?text=No+Image";
+
+                    var title = book.title || "No title";
+                    var author = (book.author_name && book.author_name.length > 0)
+                        ? book.author_name[0]
+                        : "Unknown author";
+                    var year = book.first_publish_year || "N/A";
+
+                    var img =
+                        "<img class='bookicon' " +
+                        "data-title=\"" + escapeHtml(title) + "\" " +
+                        "data-author=\"" + escapeHtml(author) + "\" " +
+                        "data-year=\"" + escapeHtml(String(year)) + "\" " +
+                        "src='" + cover + "' width='80' title=\"" + escapeHtml(title) + "\" />";
+
+                    $("#books").append(img);
+                });
+
+                $(".bookicon").on("click", function ()
+                {
+                    getBookDetails(
+                        $(this).attr("data-title"),
+                        $(this).attr("data-author"),
+                        $(this).attr("data-year")
+                    );
+                });
+            },
+            error: function ()
+            {
+                $("#books").html("<p>Error loading data.</p>");
+            }
+        });
+    }
+
+    function getBookDetails(title, author, year)
+    {
+        $("#book").html(
+            "<h2>" + title + "</h2>" +
+            "<p><strong>Author:</strong> " + author + "</p>" +
+            "<p><strong>First Published:</strong> " + year + "</p>"
+        );
+    }
+
+    function escapeHtml(text)
+    {
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/"/g, "&quot;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+    }
+    </script>
+
+    <style>
+        .bookicon {
+            vertical-align: top;
+            margin: 1px;
+        }
+
+        .bookicon:hover {
+            width: 100px;
+            cursor: pointer;
+            margin: 0 -10px 0 -10px;
+            border: 1px solid blue;
+            z-index: 9999;
+            position: relative;
+        }
+
+        .page {
+            border: thin solid blue;
+            padding: 10px;
+            text-decoration: none;
+            margin-right: 5px;
+        }
+
+        .description-box {
+            margin: 10px 0 15px 0;
+            padding: 10px 12px;
+            background-color: #f4f8fb;
+            border-left: 5px solid #4a90e2;
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+<div class="description-box">
+    <strong>About this demo:</strong> This page demonstrates pagination where users can move through multiple result pages by clicking page numbers.
+</div>
+
+<h1>Load more data through pagination</h1>
+<input type="text" id="searchTerm" value="mobile web" />
+<input type="button" id="button1" value="Search" />
+<span id="pages"></span>
+
+<h4>Search Results</h4>
+<div id="books"></div>
+
+<h4>Selected Book</h4>
+<div id="book" style="width: 800px; max-height: 100px"></div>
+</body>
+</html>
