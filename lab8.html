@@ -35,7 +35,7 @@
     document.getElementById("searchButton").addEventListener("click", function() {
       let search = document.getElementById("searchInput").value;
 
-      fetch("https://www.googleapis.com/books/v1/volumes?q=" + encodeURIComponent(search))
+      fetch("https://www.googleapis.com/books/v1/volumes?q=" + encodeURIComponent(search) + "&maxResults=8")
         .then(response => response.json())
         .then(data => {
           let results = document.getElementById("bookResults");
