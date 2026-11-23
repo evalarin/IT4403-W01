@@ -1,21 +1,55 @@
-0<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 8 - Google Books</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <strong>Elena Valarino</strong>
+        <small>IT 4403 · Kennesaw State University</small>
+      </a>
 
-  <h1>Lab 8 - Google Books</h1>
+      <nav>
+        <a href="index.html">HOME</a>
+        <a href="exercises.html">EXERCISES</a>
+        <a href="labs.html" aria-current="page">LABS</a>
+        <a href="projects.html">PROJECTS</a>
+      </nav>
+    </div>
+  </header>
 
-  <input type="text" id="searchInput" placeholder="Enter a book title">
-  <button id="searchButton">Search</button>
+  <main class="container page-content">
+    <div class="banner"></div>
 
-  <button onClick="changeLayout('list')">List View</button>
-  <button onClick="changeLayout('grid')">Grid View</button>
-  <button onClick="changeLayout('three')">3 Per Row</button>
-  <button onClick="changeLayout('first')">First Item Full Width</button>
-  <div id="bookResults"></div>
+    <section class="intro-card">
+      <h1>Lab 8: Google Books</h1>
+      <p>Searching and displaying books using the Google Books API and CSS Flexbox.</p>
+    </section>
+
+    <section class="directory-panel">
+      <input type="text" id="searchInput" placeholder="Enter a book title">
+      <button id="searchButton">Search</button>
+
+      <button onclick="changeLayout('list')">List View</button>
+      <button onclick="changeLayout('grid')">Grid View</button>
+      <button onclick="changeLayout('three')">3 Per Row</button>
+      <button onclick="changeLayout('first')">First Item Full Width</button>
+
+      <div id="bookResults"></div>
+
+      <p><a href="index.html">Back to Home</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Elena Valarino | IT 4403 | Kennesaw State University</p>
+  </footer>
 
   <script>
     document.getElementById("searchButton").addEventListener("click", function() {
@@ -45,6 +79,5 @@
       document.getElementById("bookResults").className = layout;
     }
   </script>
-<p><a href="index.html">Back to Home</a></p>
 </body>
 </html>
