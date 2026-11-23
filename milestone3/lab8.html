@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 8 - Google Books</title>
+  <style>
+    #bookResults {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .book {
+      box-sizing: border-box;
+      width: 23%;
+      padding: 10px;
+      border: 1px solid gray;
+    }
+
+    .book img {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Lab 8 - Google Books</h1>
+
+  <input type="text" id="searchInput" placeholder="Enter a book title">
+  <button id="searchButton">Search</button>
+
+  <div id="bookResults"></div>
+
+  <script>
+    document.getElementById("searchButton").addEventListener("click", function() {
+      let search = document.getElementById("searchInput").value;
+
+      fetch("https://www.googleapis.com/books/v1/volumes?q=" + encodeURIComponent(search))
+        .then(response => response.json())
+        .then(data => {
+          let results = document.getElementById("bookResults");
+          results.innerHTML = "";
+
+          (data.items || []).forEach(book => {
+            let info = book.volumeInfo;
+
+            results.innerHTML += `
+              <div class="book">
+                <h3>${info.title}</h3>
+                <p>${(info.authors || []).join(", ")}</p>
+                <img src="${info.imageLinks?.thumbnail || ""}" alt="Book cover">
+              </div>
+            `;
+          });
+        });
+    });
+  </script>
+
+</body>
+</html>
