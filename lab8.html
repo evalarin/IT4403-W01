@@ -40,6 +40,8 @@
       <button onclick="changeLayout('grid')">Grid View</button>
       <button onclick="changeLayout('three')">3 Per Row</button>
       <button onclick="changeLayout('first')">First Item Full Width</button>
+      <button onclick="changeLayout('details')">Detailed View</button>
+      <button onclick="changeLayout('simple')">Simple View</button>
 
       <div id="bookResults"></div>
 
@@ -49,6 +51,15 @@
             <h3>{{title}}</h3>
             <p>{{authors}}</p>
             <img src="{{thumbnail}}" alt="Book cover">
+          </div>
+        {{/books}}
+      </script>
+
+      <script id="simpleTemplate" type="x-tmpl-mustache">
+        {{#books}}
+          <div class="book">
+            <h3>{{title}}</h3>
+            <p>{{authors}}</p>
           </div>
         {{/books}}
       </script>
@@ -83,6 +94,8 @@
           };
         });
 
+        currentBooks = books;
+          
         let template = document.getElementById("bookTemplate").innerHTML;
         results.innerHTML = Mustache.render(template, { books: books });
     });
@@ -90,6 +103,15 @@
     function changeLayout(layout) {
       document.getElementById("bookResults").className = layout;
     }
+
+    let currentBooks = [];
+      function changeView(view) {
+        let templateId = view === "simple" ? "simpleTemplate" : "bookTemplate";
+        let template = document.getElementById(templateId).innerHTML;
+
+        document.getElementById("bookResults").innerHTML =
+          Mustache.render(template, { books: currentBooks});
+      }
   </script>
 </body>
 </html>
