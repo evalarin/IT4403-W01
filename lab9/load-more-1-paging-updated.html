@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Load more data 1: paging - Open Library</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function ()
     {
@@ -63,28 +64,19 @@
                     return;
                 }
 
-                $.each(docs, function (index, book)
-                {
-                    var cover =
-                        book.cover_i
-                        ? "https://covers.openlibrary.org/b/id/" + book.cover_i + "-M.jpg"
-                        : "https://via.placeholder.com/80x120?text=No+Image";
-
-                    var title = book.title || "No title";
-                    var author = (book.author_name && book.author_name.length > 0)
-                        ? book.author_name[0]
-                        : "Unknown author";
-                    var year = book.first_publish_year || "N/A";
-
-                    var img =
-                        "<img class='bookicon' " +
-                        "data-title=\"" + escapeHtml(title) + "\" " +
-                        "data-author=\"" + escapeHtml(author) + "\" " +
-                        "data-year=\"" + escapeHtml(String(year)) + "\" " +
-                        "src='" + cover + "' width='80' title=\"" + escapeHtml(title) + "\" />";
-
-                    $("#books").append(img);
+                var books = docs.map(function(book) {
+                    return {
+                        title: book.title || "No title",
+                        author: book.author_name ? book.author_name[0] : "Unknown author",
+                        year: book.first_publish_year || "N/A",
+                        cover: book.cover_i
+                            ? "https://covers.openlibrary.org/b/id/" + book.cover_i + "-M.jpg"
+                            : "https://via.placeholder.com/80x120?text=No+Image"
+                    };
                 });
+
+                var template = $("#bookTemplate").html();
+                $("#books").append(Mustache.render(template, {books: books}));
 
                 $(".bookicon").on("click", function ()
                 {
@@ -166,6 +158,19 @@
 
 <h4>Search Results</h4>
 <div id="books"></div>
+
+    <script id="bookTemplate" type="x-tmpl-mustache">
+        {{#books}}
+            <img class="bookicon"
+                data-title="{{title}}"
+                data-author="{{author}}"
+                data-year="{{year}}"
+                src="{{cover}}"
+                width="80"
+                title="{{title}}"
+                alt="{{title}}">
+          {{/books}}
+    </script>
 
 <h4>Selected Book</h4>
 <div id="book" style="width: 800px; max-height: 100px"></div>
