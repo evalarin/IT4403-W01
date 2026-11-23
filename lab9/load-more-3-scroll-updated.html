@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Load more data 3: scrolling to the bottom - Open Library</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function ()
+    {
+        var resultspage = 1;
+        var isLoading = false;
+        var hasMore = true;
+
+        $("#btnSearch").click(function ()
+        {
+            $("#results").html("");
+            resultspage = 1;
+            isLoading = false;
+            hasMore = true;
+            loadBooks(resultspage);
+        });
+
+        $(window).on("scroll", function ()
+        {
+            if (!isLoading && hasMore &&
+                $(window).scrollTop() + $(window).height() >= $(document).height() - 100)
+            {
+                resultspage++;
+                loadBooks(resultspage);
+            }
+        });
+
+        function loadBooks(page)
+        {
+            isLoading = true;
+
+            var term = $("#searchTerm").val().trim();
+
+            if (term === "")
+            {
+                $("#results").html("<p>Please enter a search term.</p>");
+                isLoading = false;
+                return;
+            }
+
+            var url = "https://openlibrary.org/search.json?q=" +
+                      encodeURIComponent(term) +
+                      "&page=" + page;
+
+            $.ajax({
+                url: url,
+                method: "GET",
+                dataType: "json",
+                success: function (jsonData)
+                {
+                    var docs = (jsonData.docs || []).slice(0, 10);
+
+                    if (docs.length === 0)
+                    {
+                        hasMore = false;
+                        if (page === 1)
+                        {
+                            $("#results").html("<p>No results found.</p>");
+                        }
+                        return;
+                    }
+
+                    $("#results").append("<div class='page-label'>Page " + page + "</div>");
+
+                    for (var i = 0; i < docs.length; i++)
+                    {
+                        var title = docs[i].title || "No title";
+                        var thumbnail = docs[i].cover_i
+                            ? "https://covers.openlibrary.org/b/id/" + docs[i].cover_i + "-M.jpg"
+                            : "https://via.placeholder.com/100x120?text=No+Image";
+
+                        var bookdiv = "<div class='book'>";
+                        bookdiv += "<h3 class='book-title'>" + title + "</h3>";
+                        bookdiv += "<img src='" + thumbnail + "' width='100' height='120' />";
+                        bookdiv += "</div>";
+
+                        $("#results").append(bookdiv);
+                    }
+                },
+                error: function ()
+                {
+                    $("#results").append("<p>Error loading results.</p>");
+                    hasMore = false;
+                },
+                complete: function ()
+                {
+                    isLoading = false;
+
+                    // If page is still too short to scroll, keep loading until it can scroll
+                    if (hasMore && $(document).height() <= $(window).height() + 20)
+                    {
+                        resultspage++;
+                        loadBooks(resultspage);
+                    }
+                }
+            });
+        }
+    });
+    </script>
+
+    <style>
+        body
+        {
+            font-family: Arial, sans-serif;
+        }
+
+        #results
+        {
+            display: flex;
+            flex-wrap: wrap;
+            width: 1100px;
+        }
+
+        .page-label
+        {
+            width: 100%;
+            font-weight: bold;
+            margin: 10px 0 5px 0;
+        }
+
+        .book
+        {
+            border: thin solid blue;
+            margin: 4px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            width: 98%;
+            padding: 8px;
+        }
+
+        .book-title
+        {
+            width: 100%;
+            margin: 0 0 8px 0;
+            font-size: 16px;
+        }
+
+        .description-box
+        {
+            margin: 10px 0 15px 0;
+            padding: 10px 12px;
+            background-color: #f4f8fb;
+            border-left: 5px solid #4a90e2;
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+<div class="description-box">
+    <strong>About this demo:</strong> This page demonstrates infinite scrolling where more search results automatically load as the user reaches the bottom of the page.
+</div>
+
+    <h1>Load more data by scrolling to the bottom</h1>
+    <input type="text" id="searchTerm" value="web api" />
+    <input type="button" id="btnSearch" value="Search" />
+    <div id="results"></div>
+</body>
+</html>
