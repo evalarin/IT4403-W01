@@ -43,6 +43,16 @@
 
       <div id="bookResults"></div>
 
+      <script id="bookTemplate" type="x-tmpl-mustache">
+        {{#books}}
+          <div class="book">
+            <h3>{{title}}</h3>
+            <p>{{authors}}</p>
+            <img src="{{thumbnail}}" alt="Book cover">
+          </div>
+        {{/books}}
+      </script>
+
       <p><a href="index.html">Back to Home</a></p>
     </section>
   </main>
@@ -51,6 +61,8 @@
     <p>Elena Valarino | IT 4403 | Kennesaw State University</p>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js"></script>
+  
   <script>
     document.getElementById("searchButton").addEventListener("click", function() {
       let search = document.getElementById("searchInput").value;
@@ -61,18 +73,18 @@
           let results = document.getElementById("bookResults");
           results.innerHTML = "";
 
-          (data.items || []).forEach(book => {
+          let books = (data.items || []).map(book => {
             let info = book.volumeInfo;
 
-            results.innerHTML += `
-              <div class="book">
-                <h3>${info.title}</h3>
-                <p>${(info.authors || []).join(", ")}</p>
-                <img src="${info.imageLinks?.thumbnail || ""}" alt="Book cover">
-              </div>
-            `;
-          });
+            return {
+              title: info.title,
+              authors: (info.authors || []).join(", "),
+              thumbnail: info.imageLinks?.thumbnail || ""
+          };
         });
+
+        let template = document.getElementById("bookTemplate").innerHTML;
+        results.innerHTML = Mustache.render(template, { books: books });
     });
 
     function changeLayout(layout) {
