@@ -137,7 +137,7 @@ $(document).ready(function () {
           : book.cover_i;
 
         var details = {
-          title = data.title || book.title || "Unknown Title";
+          title = data.title || book.title || "Unknown Title",
           key: book.key,
           authors: book.author_name && book.author_name.length
             ? book.author_name.join(", ")
