@@ -83,6 +83,23 @@
     <section id="collectionSection">
       <h2>Fantasy Book Collection</h2>
       <div id="bookCollection"></div>
+      <script id="collectionTemplate" type="x-tmpl-mustache">
+        {{#books}}
+        <div class="book-item">
+          <a href="#" class="collection-link" data-key="{{key}}">
+            {{title}}
+          </a>
+
+          {{#coverUrl}}
+            <img src="{{coverUrl}}" alt="Cover of {{title}}">
+          {{/coverUrl}}
+
+          {{^coverUrl}}
+            <p>No cover available.</p>
+          {{/coverUrl}}
+        </div>
+          {{/books}}
+      </script>
     </section>
   </main>
 
