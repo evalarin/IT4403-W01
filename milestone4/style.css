@@ -84,3 +84,29 @@ footer {
   text-align: center;
   padding: 20px;
 }
+#viewControls {
+  margin-bottom: 15px;
+}
+#viewControls button {
+  margin-right: 10px;
+}
+#searchResults.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+#searchResults.grid-view .book-item {
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 0;
+}
+#searchResults.list-view {
+  display: block;
+}
+#searchResults.list-view .book-item {
+  flex-direction: row;
+  text-align: left;
+}
+#searchResults.grid-view .book-item img {
+  margin-right: 0;
+}
