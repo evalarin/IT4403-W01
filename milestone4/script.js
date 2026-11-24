@@ -237,12 +237,12 @@ $(document).ready(function () {
   $("#showSearchButton").click(function () {
     $("#searchSection").show();
     $("#resultsSection").show();
-    $("#collectionSection").show();
+    $("#collectionSection").hide();
   });
 
   $("#showCollectionButton").click(function () {
-    $("#searchSection").show();
-    $("#resultsSection").show();
+    $("#searchSection").hide();
+    $("#resultsSection").hide();
     $("#collectionSection").show();
   });
 
