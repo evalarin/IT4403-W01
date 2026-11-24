@@ -25,6 +25,21 @@
     <section id="resultsSection">
       <h2>Search Results</h2>
       <div id="searchResults"></div>
+      <script id="bookTemplate" type="x-tmpl-mustache">
+        {{#books}}
+        <div class="book-item">
+          <a href="#" class="book-link" data-key="{{key}}">
+            {{title}}
+          </a>
+          {{#coverUrl}}
+            <img src="{{coverUrl}}" alt="Cover of {{title}}">
+          {{/coverUrl}}
+          {{/^coverUrl}}
+            <p>No cover available.</p>
+          {{/coverUrl}}
+        </div>
+          {{/books}}
+      </script>
       <div id="pageControls"></div>
     </section>
 
