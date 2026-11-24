@@ -124,13 +124,6 @@ $(document).ready(function () {
       type: "GET",
       dataType: "json",
       success: function (data) {
-        $("#bookDetails").empty();
-
-        var title = data.title || book.title || "Unknown Title";
-        var authors = book.author_name
-          ? book.author_name.join(", ")
-          : "Unkown Author";
-
         var description = "No description available.";
 
         if (typeof data.description === "string") {
@@ -139,42 +132,32 @@ $(document).ready(function () {
           description = data.description.value;
         }
 
-        var subjects = data.subjects
-          ? data.subjects.slice(0, 10).join(", ")
-          : "No subjects available.";
-
-        $("#bookDetails").append($("<h3>").text(title));
-        $("#bookDetails").append($("<p>").text("Work ID: " + book.key));
-        $("#bookDetails").append($("<p>").text("Author(s): " + authors));
-        $("#bookDetails").append($("<p>").text("Description: " + description));
-        $("#bookDetails").append($("<p>").text("Subjects: " + subjects));
-
         var coverId = data.covers && data.covers.length
           ? data.covers[0]
           : book.cover_i;
 
-        if (coverId) {
-          $("#bookDetails").append(
-            $("<img>")
-              .attr("src", "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg")
-              .attr("alt", "Cover of " + title)
-            );
-        } else {
-          $("#bookDetails").append($("<p>").text("No cover available."));
-        }
+        var details = {
+          title = data.title || book.title || "Unknown Title";
+          key: book.key,
+          authors: book.author_name && book.author_name.length
+            ? book.author_name.join(", ")
+            : "Unkown Author",
+          description: description,
+          subjects: data.subjects && data.subjects.length
+            ? data.subjects.slice(0, 10).join(", ")
+            : "No subjects available.";
+          firstPublished: data.first_publish_date || book.first_publish_year || "Not available",
+          coverUrl: coverId
+            ? "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg"
+            : "",
+          openLibraryUrl: "https://openlibrary.org" + book.key
+      };
 
-        $("#bookDetails").append(
-          $("<p>").append(
-            $("<a>")
-              .attr("href", "https://openlibrary.org" + book.key)
-              .attr("target", "_blank")
-              .attr("rel", "noopener noreferrer")
-              .text("View on Open Library")
-            )
-          );
-      },
-      error: function () {
-        $("#bookDetails").text("Unable to load book details. Please try again.");
+      var template = $("#detailsTemplate").html();
+      $("#bookDetails").html(Mustache.render(template, details));
+    },
+    error: function () {
+      $("#bookDetails").text("Unable to load book details. Please try again.");
       }
     });
   }
