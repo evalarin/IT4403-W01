@@ -173,61 +173,55 @@ $(document).ready(function () {
         limit: 10
       },
       success: function (data) {
-        $("#bookCollection").empty();
-
         if (!data.works || data.works.length === 0) {
           $("#bookCollection").text("No books available.");
           return;
         }
 
-        $.each(data.works, function (index, book) {
-          var bookItem = $("<div>").addClass("book-item");
-
-          var title = $("<a>")
-            .attr("href", "#")
-            .text(book.title || "Unknown Title");
-
-          title.click(function (event) {
-            event.preventDefault();
-
-            var selectedBook = {
-              key: book.key,
-              title: book.title,
-              cover_i: book.cover_id,
-              author_name: book.authors
-                ? book.authors.map(function (author) {
-                  return author.name;
-                })
-                : []
-            };
-
-            displayBookDetails(selectedBook);
-
-            $("html, body").animate({
-              scrollTop: $("#detailsSection").offset().top
-            }, 500);
-          });
-
-          bookItem.append(title);
-
-          if (book.cover_id) {
-            bookItem.append(
-              $("<img>")
-                .attr("src", "https://covers.openlibrary.org/b/id/" + book.cover_id + "-S.jpg")
-                .attr("alt", "Cover of " + (book.title || "book"))
-              );
-          } else {
-            bookItem.append($("<p>").text("No cover available."));
-          }
-
-          $("#bookCollection").append(bookItem);
+        collectionBooks = data.works.map(function (book) {
+          return {
+            key: book.key,
+            title: book.title || "Unknown Title",
+            cover_i: book.cover_id,
+            author_name: book.authors
+              ? book.authors.map(function (author) {
+                return author.name;
+              })
+            : [],
+          coverUrl: book.cover_id
+            ? "https://covers.openlibrary.org/b/id/" + book.cover_id + "-S.jpg"
+            : ""
+          };
         });
+
+        var template = $("#detailsTemplate").html();
+        $("#bookDetails").html(
+          Mustache.render(template, { books: collectionBooks })
+        );
       },
       error: function () {
         $("#bookCollection").text("Unable to load collection.");
       }
     });
   }
+
+  $("#bookCollection").on("click", ".collection-link", function (event) {
+    event.preventDefault();
+
+    var key = $(this).attr("data-key");
+
+    var selectedBook = collectionBooks.find(function (book) {
+      return book.key === key;
+    });
+
+    if (selectedBook) {
+      displayBookDetails(selectedBook);
+
+      $("html, body").animate({
+        scrollTop: $("#detailsSection").offset().top
+      }, 500);
+    }
+  });
 
   $("#gridViewButton").click(function () {
     currentView = "grid";
