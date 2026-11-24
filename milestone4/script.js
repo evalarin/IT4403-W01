@@ -3,6 +3,7 @@ $(document).ready(function () {
   var books = [];
   var currentPage = 1;
   var booksPerPage = 10;
+  var currentView = "grid";
 
   $("#searchButton").click(function () {
     var searchTerm = $("#searchInput").val().trim();
@@ -51,6 +52,9 @@ $(document).ready(function () {
   function displayBooks() {
     $("#searchResults").empty();
     $("#pageControls").empty();
+    $("#searchResults")
+      .removeClass("grid-view list-view")
+      .addClass(currentView + "-view");
 
     var start = (currentPage - 1) * booksPerPage;
     var end = start + booksPerPage;
@@ -242,5 +246,14 @@ $(document).ready(function () {
     });
   }
 
+  $("#gridViewButton").click(function () {
+    currentView = "grid";
+    displayBooks();
+  });
+
+  $("#listViewButton").click(function () {
+    currentView = "list";
+    displayBooks();
+  });
   loadCollection();
 });
