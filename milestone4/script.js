@@ -137,15 +137,15 @@ $(document).ready(function () {
           : book.cover_i;
 
         var details = {
-          title = data.title || book.title || "Unknown Title",
+          title: data.title || book.title || "Unknown Title",
           key: book.key,
           authors: book.author_name && book.author_name.length
             ? book.author_name.join(", ")
-            : "Unkown Author",
+            : "Unknown Author",
           description: description,
           subjects: data.subjects && data.subjects.length
             ? data.subjects.slice(0, 10).join(", ")
-            : "No subjects available.";
+            : "No subjects available.",
           firstPublished: data.first_publish_date || book.first_publish_year || "Not available",
           coverUrl: coverId
             ? "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg"
