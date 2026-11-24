@@ -110,3 +110,11 @@ footer {
 #searchResults.grid-view .book-item img {
   margin-right: 0;
 }
+#sectionNavigation {
+  text-align: center;
+  margin-bottom: 25px;
+}
+#sectionNavigation button {
+  margin: 5px;
+  padding: 12px 20px;
+}
