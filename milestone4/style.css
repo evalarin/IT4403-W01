@@ -116,5 +116,33 @@ footer {
 }
 #sectionNavigation button {
   margin: 5px;
-  padding: 12px 20px;
+}
+@media (max-width: 600px) {
+  main {
+    padding: 0 10px;
+  }
+  section {
+    padding: 15px;
+  }
+  #searchInput {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  #searchResults.grid-view {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  #searchResults.list-view .book-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  .book-item img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 400px) {
+  #searchResults.grid-view {
+    grid-template-columns: 1fr;
+  }
 }
