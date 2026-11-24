@@ -4,6 +4,7 @@ $(document).ready(function () {
   var currentPage = 1;
   var booksPerPage = 10;
   var currentView = "grid";
+  var collectionBooks = [];
 
   $("#searchButton").click(function () {
     var searchTerm = $("#searchInput").val().trim();
@@ -194,8 +195,8 @@ $(document).ready(function () {
           };
         });
 
-        var template = $("#detailsTemplate").html();
-        $("#bookDetails").html(
+        var template = $("#collectionTemplate").html();
+        $("#bookCollection").html(
           Mustache.render(template, { books: collectionBooks })
         );
       },
