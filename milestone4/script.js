@@ -233,5 +233,20 @@ $(document).ready(function () {
     currentView = "list";
     displayBooks();
   });
+
+  $("#showSearchButton").click(function () {
+    $("#searchSection").show();
+    $("#resultsSection").show();
+    $("#collectionSection").show();
+  });
+
+  $("#showCollectionButton").click(function () {
+    $("#searchSection").show();
+    $("#resultsSection").show();
+    $("#collectionSection").show();
+  });
+
+  $("#collectionSection").hide();
+  
   loadCollection();
 });
