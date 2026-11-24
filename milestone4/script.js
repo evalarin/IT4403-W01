@@ -56,36 +56,19 @@ $(document).ready(function () {
     var end = start + booksPerPage;
     var pageBooks = books.slice(start, end);
 
-    $.each(pageBooks, function (index, book) {
-      var bookItem = $("<div>").addClass("book-item");
-
-      var title = $("<a>")
-        .attr("href", "#")
-        .text(book.title || "Unknown Title");
-
-      title.click(function (event) {
-        event.preventDefault();
-        displayBookDetails(book);
-
-        $("html, body").animate({
-          scrollTop: $("#detailsSection").offset().top
-        }, 500);
-      });
-      
-      bookItem.append(title);
-
-      if (book.cover_i) {
-        var cover = $("<img>")
-          .attr("src", "https://covers.openlibrary.org/b/id/" + book.cover_i + "-S.jpg")
-          .attr("alt", "Cover of " + (book.title || "book"));
-
-        bookItem.append(cover);
-      } else {
-        bookItem.append($("<p>").text("No cover available."));
-      }
-
-      $("#searchResults").append(bookItem);
+    var templateBooks = pageBooks.map(function (book) {
+      return {
+        key: book.key,
+        title: book.title || "Unknown Title",
+        coverUrl: book.cover_i
+          ? "https://covers.openlibrary.org/b/id/" + book.cover_i + "-S.jpg"
+          : ""
+      };
     });
+
+    var template = $("#bookTemplate").html();
+    var html = Mustache.render(template, { books: templateBooks });
+    $("#searchResults").html(html);
 
     var totalPages = Math.ceil(books.length / booksPerPage);
 
@@ -110,6 +93,24 @@ $(document).ready(function () {
       $("<p>").text("Page " + currentPage + " of " + totalPages)
     );
   }
+
+  $("#searchResults").on("click", ".book-link", function (event) {
+    event.preventDefault();
+
+    var key = $(this).attr("data-key");
+
+    var selectedBook = books.find(function (book) {
+      return book.key === key;
+    });
+
+    if (selectedBook) {
+      displayBookDetails(selectedBook);
+
+      $("html, body").animate({
+        scrollTop: $("#detailsSection").offset().top
+      }, 500);
+    }
+  });
 
   function displayBookDetails(book) {
     $("#bookDetails").text("Loading book details...");
